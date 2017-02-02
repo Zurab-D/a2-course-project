@@ -1,0 +1,13 @@
+.btn {
+  margin-right: 5px;
+  font-size: 14px;
+  /*padding: 10px;
+  cursor: pointer;
+  border: 1px solid grey;
+  background-color: lightgrey;*/
+}
+
+.group {
+  margin: 10px;
+  font-size: 0;
+}

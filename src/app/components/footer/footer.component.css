@@ -1,0 +1,14 @@
+footer .copyright {
+  position: absolute;
+  padding: 5px 10px;
+  height: 23px;
+  bottom: 0px;
+  width: 100%;
+  background-color: lightgray;
+  font-size: 12px;
+}
+
+footer .copyright span {
+  background-color: lightgray;
+}
+

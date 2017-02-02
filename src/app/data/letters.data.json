@@ -1,0 +1,17 @@
+﻿[
+  {"mailbox":"spam","subject":"Sp - Some spam emails received","body":"Buy, sell, rent","to":"spam@test.com"},
+
+  {"mailbox":"inbox","subject":"I - New discount from Udemy","body":"Take a chance to get 40% discount","to":"udemy@test.com"},
+  {"mailbox":"inbox","subject":"I - New discount from Dropbox","body":"Take a chance to get 20% discount","to":"dropbox@test.com"},
+  {"mailbox":"inbox","subject":"I - New JS course","body":"JS extra course. Check the link.","to":"js@test.com"},
+  {"mailbox":"inbox","subject":"I - JS homework","body":"Use this link to see homework","to":"courses@test.com"},
+
+  {"mailbox":"sent","subject":"S - Q/A homework","body":"Check the list answers here","to":"artur@test.com"},
+  {"mailbox":"sent","subject":"S - Test email","body":"test example of email","to":"attt@test.com"},
+  {"mailbox":"sent","subject":"S - Private emails","body":"Tell me Peter's phone number","to":"atttettt@test.com"},
+  {"mailbox":"sent","subject":"S - Wiki email","body":"some info from wiki","to":"wiki@test.com"},
+
+  {"mailbox":"trash","subject":"T - New discount from Udemy","body":"<h4>Show the best options from Udemy</h4>","to":"artur@test.com"},
+  {"mailbox":"trash","subject":"T - Dropbox upgrade","body":"<h4>Show the best options from Dropbox</h4>","to":"dropbox@test.com"},
+  {"mailbox":"trash","subject":"T - VK new message","body":"<h4>You have a new message</h4>","to":"vk@test.com"}
+]

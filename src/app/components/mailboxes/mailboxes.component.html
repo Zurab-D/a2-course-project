@@ -1,0 +1,6 @@
+<aside class="sidebar col-sm-2">
+  <button class="compose btn btn-danger" (click)="clickCompose()" _routerLink="/users">Compose</button>
+  <ul class="inbox-sections list-unstyled">
+    <li *ngFor="let mailbox of mailboxes"><a [routerLink]="'/mail/' + mailbox.title" routerLinkActive="active">{{mailbox.title}}</a></li>
+  </ul>
+</aside>

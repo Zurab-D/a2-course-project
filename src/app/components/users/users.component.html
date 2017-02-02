@@ -1,0 +1,7 @@
+<section class="users">
+  <h3>Users:</h3>
+  <ul>
+    <li *ngFor="let user of users">{{user.fullName}} :: {{user.email}}</li>
+    <!-- <li *ngFor="let mailbox of mailboxes"><a [routerLink]="'/mail/' + mailbox.title" routerLinkActive="active">{{mailbox.title}}</a></li> -->
+  </ul>
+</section>

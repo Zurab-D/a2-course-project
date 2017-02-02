@@ -1,0 +1,51 @@
+/*.app-body {
+  padding: 5px;
+}
+
+.tabs {
+  font-size: 0;
+}
+
+.tabs a {
+  display: inline-block;
+  margin: 5px 1px 5px 0;
+  padding: 20px;
+  font-size: 14px;
+  background-color: #f5f5f5;
+  vertical-align: top;
+  text-decoration: none;
+}
+
+.tabs a:hover {
+  background-color: #e5e5e5;
+}
+
+.tabs a.active {
+  background-color: #e3e3e3;
+}*/
+
+.menu-container {
+  float: left;
+  display: inline-block;
+  width: 240px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.menu {
+  display: inline-block;
+  padding: 10px;
+  font-size: 17px;
+  color: #000;
+  cursor: pointer;
+}
+
+.menu.active,
+.menu:hover {
+  color: #d14836;
+}
+
+.dropdown-toggle {
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+}

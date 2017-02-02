@@ -1,0 +1,14 @@
+.pointer {
+  cursor: pointer;
+}
+
+.people {
+  padding-right: 0;
+}
+
+.people-names {
+  float: right;
+  display: inline-block;
+  vertical-align: top;
+  width: calc(100% - 85px);
+}
