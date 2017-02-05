@@ -11,6 +11,7 @@ import { IMailbox } from '../interfaces/mailbox';
 import { CONFIG } from '../config';
 import { lettersData } from '../data/letters.data';
 
+
 @Injectable()
 export class LettersService {
 

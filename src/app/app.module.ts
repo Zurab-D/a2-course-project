@@ -35,6 +35,9 @@ import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { LetterResolve } from './resolves/letter.resolve';
 import { UserResolve } from './resolves/user.resolve';
 
+import { TypedirectiveDirective } from './components/mail-edit/typedirective.directive';
+import { TypeaheadService } from './services/typeahead.service';
+
 
 @NgModule({
   declarations: [
@@ -53,7 +56,8 @@ import { UserResolve } from './resolves/user.resolve';
     HeaderComponent,
     FooterComponent,
     FilterSearchPipe,
-    UserEditComponent
+    UserEditComponent,
+    TypedirectiveDirective
   ],
   imports: [
     BrowserModule,
@@ -64,7 +68,7 @@ import { UserResolve } from './resolves/user.resolve';
   ],
   providers: [
     LettersService, SearchService, MailboxesService, ResponseService, UsersService, CheckboxLetterService,
-    DeleteAllButtonService, LetterResolve, UserResolve
+    DeleteAllButtonService, LetterResolve, UserResolve, TypeaheadService
   ],
   bootstrap: [AppComponent]
 })

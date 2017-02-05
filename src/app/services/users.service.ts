@@ -19,6 +19,8 @@ export class UsersService {
 
 
   getAll(): Observable<IUser[]> {
+    console.log('=====>> UsersService :: getAll()');
+
     return this.http
       .get(CONFIG.urls.users)
       .map(this.responseService.extractData)
@@ -27,6 +29,8 @@ export class UsersService {
 
 
   getById(id: string): Observable<IUser> {
+    console.log('=====>> UsersService :: ');
+
     return this.http
       .get(`${CONFIG.urls.users}/${id}`)
       .map(this.responseService.extractData)
@@ -76,4 +80,15 @@ export class UsersService {
     return this.currentUser;
   }
 
+
+  patchUser(user: IUser) {
+    return this.http.patch(`${CONFIG.urls.users}/${user._id}`, user)
+             .map(this.responseService.extractData)
+             .catch(this.responseService.handleError)
+  }
+
+
+  createUser(user: IUser) {
+
+  }
 }

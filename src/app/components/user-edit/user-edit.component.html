@@ -1,4 +1,5 @@
 <form class="cover" action="" #f="ngForm" (ngSubmit)="onSubmit(f)">
+<!--<form class="cover" action="http://test-api.javascript.ru/v1/zurab/users" method="POST">-->
 
   <div>
     <div class="buttons">
@@ -24,7 +25,7 @@
 
     <div>
       <label>gender: </label>
-      <input type="text" class="gender" name="gender" [(ngModel)]="user.gender">
+      <input type="text" class="gender" name="gender" [(ngModel)]="user.gender" pattern="M|F">
     </div>
 
     <div>
@@ -34,3 +35,5 @@
   </div>
 
 </form>
+
+<div class="alert alert-danger" *ngIf="errorMsg">{{errorMsg}}</div>

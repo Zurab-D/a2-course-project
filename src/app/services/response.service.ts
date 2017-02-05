@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { IResponse } from '../interfaces/response';
 import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/throw';
+
 
 @Injectable()
 export class ResponseService implements IResponse {
@@ -25,8 +27,6 @@ export class ResponseService implements IResponse {
     } else {
       result = error.message ? error.message : error.toString();
     }
-    if (Observable.throw) {
-      return Observable.throw(result);
-    }
+    return Observable.throw(result);
   }
 }

@@ -22,6 +22,7 @@ export class UserEditComponent implements OnInit, AfterViewInit {
   private id: string;
   public user: IUser = new User();
   public tmpUser: IUser = undefined;
+  private errorMsg;
 
 
   constructor(private usersService: UsersService,
@@ -66,7 +67,20 @@ export class UserEditComponent implements OnInit, AfterViewInit {
 
 
   onSubmit(f: NgForm) {
-    console.log(f.value);
+    console.log('=====>> onSubmit()');
+
+    this.usersService
+        .patchUser(this.user)
+        .subscribe(
+          data => {
+            console.log('user patched');
+            this.router.navigate(['-1'], { relativeTo: this.route });
+            // this.router.navigate(['/users']);
+          },
+          err => {
+            this.errorMsg = err;
+          }
+        );
   }
 
 

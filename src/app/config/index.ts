@@ -9,5 +9,6 @@
         users: "http://test-api.javascript.ru/v1/zurab/users",
         letters: "http://test-api.javascript.ru/v1/zurab/letters",
         mailboxes: "http://test-api.javascript.ru/v1/zurab/mailboxes"
-    }
+    },
+    userMailField: "email"
 }
