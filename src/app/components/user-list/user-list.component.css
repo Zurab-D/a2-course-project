@@ -1,0 +1,19 @@
+.users ul {
+  width: 400px;
+  list-style: none;
+}
+
+.users ul li {
+  border-bottom: 1px solid #aaa;
+}
+
+.users ul li a {
+  display: block;
+  padding: 5px 0;
+  text-decoration: none;
+}
+
+.users ul li a:hover {
+  background-color: #f1f1f1;
+  text-decoration: none;
+}

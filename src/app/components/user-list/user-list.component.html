@@ -1,0 +1,6 @@
+<section class="users">
+  <h3>Users:</h3>
+  <ul>
+    <li *ngFor="let user of users"><a [routerLink]="user._id" (click)="userClicked(user)">{{user.fullName}} :: {{user.email}}</a></li>
+  </ul>
+</section>

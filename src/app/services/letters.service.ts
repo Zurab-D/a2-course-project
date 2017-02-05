@@ -128,7 +128,6 @@ export class LettersService {
     const letters: Array<ILetter> = [];
 
     letter.mailbox = this.mailboxesService.getMailboxId('sent');
-    console.log(letter);
     letters.push(letter);
 
     const data = { letters: letters };

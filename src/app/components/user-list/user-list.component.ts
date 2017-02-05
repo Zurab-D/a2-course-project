@@ -4,11 +4,11 @@ import { IUser } from '../../interfaces/user';
 import { UsersService } from '../../services/users.service';
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+  selector: 'app-user-list',
+  templateUrl: './user-list.component.html',
+  styleUrls: ['./user-list.component.css']
 })
-export class UsersComponent implements OnInit {
+export class UsersListComponent implements OnInit {
 
   users: IUser[] = [];
 
@@ -28,4 +28,8 @@ export class UsersComponent implements OnInit {
     this.usersService.createUsersBunch().subscribe();
   }
 
+
+  userClicked(user) {
+    this.usersService.setCurrentUser(user);
+  }
 }

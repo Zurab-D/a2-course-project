@@ -1,9 +1,11 @@
 import { MailComponent } from './components/mail/mail.component';
 import { MailListComponent } from './components/mail-list/mail-list.component';
-import { MailReadComponent } from './components/mail-read/mail-read.component';
-import { UsersComponent } from './components/users/users.component';
+import { MailEditComponent } from './components/mail-edit/mail-edit.component';
+import { UserEditComponent } from './components/user-edit/user-edit.component';
+import { UsersListComponent } from './components/user-list/user-list.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { LetterResolve } from './resolves/letter.resolve';
+import { UserResolve } from './resolves/user.resolve';
 
 
 export const Routes = [
@@ -16,31 +18,31 @@ export const Routes = [
     redirectTo: 'mail/Inbox', pathMatch: 'full',
   },
 
-  { path: 'mail',
-    component: MailComponent,
+  { path: 'mail', component: MailComponent,
       children: [
         {path: '', component: MailListComponent
         },
 
-        {path: 'new', component: MailReadComponent
+        {path: 'new', component: MailEditComponent
         },
 
         {path: ':mailbox', component: MailListComponent
         },
 
         {
-          path: ':mailbox/:id', component: MailReadComponent,
+          path: ':mailbox/:id', component: MailEditComponent,
           resolve: { letter: LetterResolve }
         },
 
       ]
-
   },
 
-  { path: 'users',
-    component: UsersComponent },
+  { path: 'users', component: UsersListComponent },
 
-  { path: 'settings',
-    component: SettingsComponent },
+  { path: 'users/:id', component: UserEditComponent,
+    resolve: { user: UserResolve }
+  },
+
+  { path: 'settings', component: SettingsComponent },
 
 ];

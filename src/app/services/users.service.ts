@@ -12,6 +12,9 @@ import { usersData } from '../data/users.data';
 @Injectable()
 export class UsersService {
 
+  currentUser: IUser;
+
+
   constructor(private http: Http, private responseService: ResponseService) { }
 
 
@@ -19,8 +22,15 @@ export class UsersService {
     return this.http
       .get(CONFIG.urls.users)
       .map(this.responseService.extractData)
-      .catch(this.responseService.handleError)
-    ;
+      .catch(this.responseService.handleError);
+  }
+
+
+  getById(id: string): Observable<IUser> {
+    return this.http
+      .get(`${CONFIG.urls.users}/${id}`)
+      .map(this.responseService.extractData)
+      .catch(this.responseService.handleError);
   }
 
 
@@ -54,6 +64,16 @@ export class UsersService {
         .delete(CONFIG.urls.users)
         .map(x => x)
         .catch(this.responseService.handleError);
+  }
+
+
+  setCurrentUser(user: IUser) {
+    this.currentUser = user;
+  }
+
+
+  getCurrentUser(): IUser {
+    return this.currentUser;
   }
 
 }

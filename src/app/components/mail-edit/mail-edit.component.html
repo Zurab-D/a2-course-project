@@ -4,23 +4,25 @@
     <button class="btn btn-control btn-send" [ngClass]="{hidden: !!letter._id}" (click)="clickSave(myForm)" >Save</button>
     <button class="btn btn-control btn-back" (click)="clickBack()" >Go back</button>
   </div>
-  <!--<p>{{letter._id}}</p>-->
+
   <div class="to">
     <span class="label">to:</span>
     <span class="input">
       <input class="mail-to" type="text" value="{{letter.to}}">
     </span>
   </div>
+
   <div class="subject">
     <span class="label">subject:</span>
     <span class="input">
       <input class="mail-subject" type="text" value="{{letter.subject}}">
     </span>
-    </div>
+  </div>
+
   <div class="body">
     <span class="label">body:</span>
     <span class="input">
       <textarea class="mail-body" name="letter-body" id="" cols="30" rows="10">{{letter.body}}</textarea>
     </span>
-    </div>
+  </div>
 </section>

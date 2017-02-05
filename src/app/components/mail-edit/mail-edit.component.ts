@@ -6,11 +6,11 @@ import { LettersService } from '../../services/letters.service';
 import { Letter, ILetter } from '../../interfaces/letter';
 
 @Component({
-  selector: 'app-mail-read',
-  templateUrl: './mail-read.component.html',
-  styleUrls: ['./mail-read.component.css']
+  selector: 'app-mail-edit',
+  templateUrl: './mail-edit.component.html',
+  styleUrls: ['./mail-edit.component.css']
 })
-export class MailReadComponent implements OnInit {
+export class MailEditComponent implements OnInit {
 
   private id: string;
 

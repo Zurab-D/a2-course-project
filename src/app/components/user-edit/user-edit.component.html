@@ -1,0 +1,36 @@
+<form class="cover" action="" #f="ngForm" (ngSubmit)="onSubmit(f)">
+
+  <div>
+    <div class="buttons">
+      <span class="label"></span>
+      <button class="btn btn-control btn-send" type="submit">Save</button>
+      <button class="btn btn-control btn-back" (click)="clickBack()" >Cancel</button>
+    </div>
+
+    <div>
+      <label>fullName: </label>
+      <input class="full-name" name="fullname" type="text" [(ngModel)]="user.fullName" required>
+    </div>
+
+    <div>
+      <label>email: </label>
+      <input class="email" name="email" type="text" [(ngModel)]="user.email" required pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$">
+    </div>
+
+    <div>
+      <label>birthdate: </label>
+      <input class="birthdate" name="birthdate" type="text" [(ngModel)]="user.birthdate" >
+    </div>
+
+    <div>
+      <label>gender: </label>
+      <input type="text" class="gender" name="gender" [(ngModel)]="user.gender">
+    </div>
+
+    <div>
+      <label>address: </label>
+      <input class="address" name="address" type="text" [(ngModel)]="user.address">
+    </div>
+  </div>
+
+</form>

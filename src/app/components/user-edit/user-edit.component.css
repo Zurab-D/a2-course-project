@@ -1,0 +1,41 @@
+.cover {
+  width: 500px;
+  padding: 5px;
+}
+
+.cover label {
+  width: 70px;
+  display: inline-block;
+  vertical-align: top;
+  height: 30px;
+  padding-top: 12px;
+  text-align: right;
+}
+
+.cover input{
+  margin: 5px;
+  padding: 5px;
+  display: inline-block;
+  vertical-align: top;
+  width: calc(100% - 85px);
+}
+
+.buttons {
+  margin: 10px 0 5px 80px;
+}
+
+input.ng-dirty {
+  background-color: rgba(200, 200, 0, 0.3);
+}
+
+input.ng-valid {
+  background-color: rgba(0, 255, 80, 0.3);
+}
+
+input.ng-invalid {
+  background-color: rgba(255, 10, 80, 0.3);
+}
+
+input.ng-pending {
+  background-color: rgba(255,250, 80, 0.3);
+}

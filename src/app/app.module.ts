@@ -1,17 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { MailComponent } from './components/mail/mail.component';
 import { MailListComponent } from './components/mail-list/mail-list.component';
 import { MailItemComponent } from './components/mail-item/mail-item.component';
-import { MailReadComponent } from './components/mail-read/mail-read.component';
+import { MailEditComponent } from './components/mail-edit/mail-edit.component';
 import { MailboxesComponent } from './components/mailboxes/mailboxes.component';
 
-import { UsersComponent } from './components/users/users.component';
+import { UsersListComponent } from './components/user-list/user-list.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LogoComponent } from './components/header/logo/logo.component';
@@ -30,20 +30,21 @@ import { DeleteAllButtonService } from './services/delete-all-button.service';
 import { FilterMailboxPipe } from './pipes/filter-mailbox.pipe';
 import { FilterSearchPipe } from './pipes/filter-search.pipe';
 
-import { LetterResolve } from './resolves/letter.resolve';
 import { Routes } from './app.routes';
+import { UserEditComponent } from './components/user-edit/user-edit.component';
+import { LetterResolve } from './resolves/letter.resolve';
+import { UserResolve } from './resolves/user.resolve';
 
-// import { SearchResolve } from './routes/search.resolve';
 
 @NgModule({
   declarations: [
     AppComponent,
     MailListComponent,
     MailItemComponent,
-    MailReadComponent,
+    MailEditComponent,
     MailboxesComponent,
     FilterMailboxPipe,
-    UsersComponent,
+    UsersListComponent,
     MailComponent,
     SettingsComponent,
     SearchComponent,
@@ -51,17 +52,19 @@ import { Routes } from './app.routes';
     LogoComponent,
     HeaderComponent,
     FooterComponent,
-    FilterSearchPipe
+    FilterSearchPipe,
+    UserEditComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     RouterModule.forRoot(Routes, {useHash: true})
   ],
   providers: [
     LettersService, SearchService, MailboxesService, ResponseService, UsersService, CheckboxLetterService,
-    DeleteAllButtonService, LetterResolve
+    DeleteAllButtonService, LetterResolve, UserResolve
   ],
   bootstrap: [AppComponent]
 })
