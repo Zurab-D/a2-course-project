@@ -73,14 +73,12 @@ export class UserEditComponent implements OnInit, AfterViewInit {
 
                     this.ngAfterViewInit_Function();
                     console.log('user data not resolved & got from the server!!!');
-                    console.log(this.user);
                   });
             }
           } else {
             this.user = this.tmpUser;
             this.ngAfterViewInit_Function();
             console.log('user data resolved.');
-            console.log(this.user);
           }
       });
 

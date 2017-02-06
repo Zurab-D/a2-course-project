@@ -20,7 +20,7 @@ export const Routes = [
 
   { path: 'mail', component: MailComponent,
       children: [
-        { path: '', component: MailListComponent },
+        // { path: '', component: MailListComponent },
 
         { path: 'new', component: MailEditComponent },
 

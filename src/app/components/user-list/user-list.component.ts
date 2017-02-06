@@ -30,7 +30,7 @@ export class UsersListComponent implements OnInit {
                               new Date(user.birthdate),
                               user.gender,
                               user.address
-                            )
+                            );
                           });
       });
   }
@@ -52,16 +52,12 @@ export class UsersListComponent implements OnInit {
 
 
   clickXBtn(user) {
-    console.log(user);
     this.usersService
         .deleteUser(user)
         .subscribe(data => {
           console.log(`user deleted`);
           // const i = this.users.map(item => item._id).indexOf(user._id);
           const i = this.users.indexOf(user);
-          console.log(`i = ${i}`);
-          console.log(user);
-          console.log(this.users);
           if (~i) {
             this.users.splice(i, 1);
           }

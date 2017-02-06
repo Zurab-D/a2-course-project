@@ -19,8 +19,8 @@ import 'rxjs/add/operator/toPromise';
 })
 export class MailListComponent implements OnInit {
   private letters: ILetter[] = [];
-  mailboxValue: string = '';
-  searchValue: string = '';
+  mailboxValue = '';
+  searchValue = '';
 
   constructor(private lettersService: LettersService,
               private route: ActivatedRoute,

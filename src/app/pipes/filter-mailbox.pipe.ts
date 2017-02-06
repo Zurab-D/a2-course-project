@@ -12,6 +12,10 @@ export class FilterMailboxPipe implements PipeTransform {
   constructor (private mailboxesService: MailboxesService) { }
 
   transform(letters: ILetter[], mailboxValue: string): any {
+    if (!mailboxValue) {
+      return letters;
+    }
+
     const mailboxId: string = this.mailboxesService.getMailboxId(mailboxValue);
 
     if (letters && mailboxId) {

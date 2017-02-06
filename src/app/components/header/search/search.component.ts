@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
 import { SearchService } from '../../../services/search.service';
+
 
 @Component({
   selector: 'app-search',
@@ -19,4 +21,5 @@ export class SearchComponent implements OnInit {
       this.searchService.search(value);
     }
   }
+
 }
