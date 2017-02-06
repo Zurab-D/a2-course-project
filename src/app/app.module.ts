@@ -38,6 +38,8 @@ import { UserResolve } from './resolves/user.resolve';
 import { TypedirectiveDirective } from './components/mail-edit/typedirective.directive';
 import { TypeaheadService } from './services/typeahead.service';
 
+import { MyDatePickerModule } from 'mydatepicker';
+
 
 @NgModule({
   declarations: [
@@ -64,6 +66,7 @@ import { TypeaheadService } from './services/typeahead.service';
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    MyDatePickerModule,
     RouterModule.forRoot(Routes, {useHash: true})
   ],
   providers: [

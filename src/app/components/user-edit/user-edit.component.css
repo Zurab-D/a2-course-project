@@ -12,12 +12,18 @@
   text-align: right;
 }
 
-.cover input{
+.cover input,
+.cover my-date-picker,
+.cover select{
   margin: 5px;
   padding: 5px;
   display: inline-block;
   vertical-align: top;
   width: calc(100% - 85px);
+}
+
+.cover my-date-picker {
+  padding: 0;
 }
 
 .buttons {
@@ -39,3 +45,5 @@ input.ng-invalid {
 input.ng-pending {
   background-color: rgba(255,250, 80, 0.3);
 }
+
+/*.ng-pristine*/

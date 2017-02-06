@@ -1,6 +1,10 @@
 <section class="users">
-  <h3>Users:</h3>
+  <button class="btn btn-control btn-add" (click)="clickAdd()">New user</button>
   <ul>
-    <li *ngFor="let user of users"><a [routerLink]="user._id" (click)="userClicked(user)">{{user.fullName}} :: {{user.email}}</a></li>
+    <li *ngFor="let user of users">
+      <a [routerLink]="user._id" (click)="userClicked(user)">{{user.fullName}} :: {{user.email}} :: {{user.birthdate.toLocaleDateString()}}</a>
+      <button type="button" class="btn btn-default btn-xs" (click)="clickXBtn(user)">x</button>
+    </li>
   </ul>
 </section>
+<router-outlet></router-outlet>

@@ -12,6 +12,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UsersService } from '../../services/users.service';
 import { User, IUser } from '../../interfaces/user';
 
+import { IMyDateModel, IMyOptions } from 'mydatepicker';
+
+
 @Component({
   selector: 'app-user-edit',
   templateUrl: './user-edit.component.html',
@@ -24,11 +27,22 @@ export class UserEditComponent implements OnInit, AfterViewInit {
   public tmpUser: IUser = undefined;
   private errorMsg;
 
+  private model: Object;
+
+
+  myDatePickerOptions: IMyOptions = {
+    dateFormat: 'dd.mm.yyyy',
+  };
+
+  onDateChanged(event: IMyDateModel) {
+    this.user.birthdate = new Date(event.jsdate);
+  }
 
   constructor(private usersService: UsersService,
               private route: ActivatedRoute,
               private location: Location,
               private router: Router) {
+    this.tmpUser = this.route.snapshot.data['user'];
   }
 
 
@@ -37,27 +51,38 @@ export class UserEditComponent implements OnInit, AfterViewInit {
     // get user from resolved data
     this.tmpUser = this.route.snapshot.data['user'];
 
-    if (!this.tmpUser) {
-      console.log('user data not resolved & got from the server!!!');
-
-      // user data not resolved. go get user data from the server.
-      // this happens when user comes here by direct link (previously saved, for example)
-      this.route
-          .params
-          .subscribe(params => {
-            this.id = params['id'] || '';
+    this.route
+        .params
+        .subscribe(params => {
+          this.id = params['id'] || '';
+          if (!this.tmpUser) {
+            // user data not resolved. go get user data from the server.
+            // this happens when user comes here by direct link (previously saved, for example)
             if (this.id) {
               this.usersService
                   .getById(this.id)
                   .subscribe(data => {
-                    this.user = data;
+                    this.user = {
+                      _id: data._id,
+                      fullName: data.fullName,
+                      email: data.email,
+                      birthdate: new Date(data.birthdate),
+                      gender: data.gender,
+                      address: data.address
+                    };
+
+                    this.ngAfterViewInit_Function();
+                    console.log('user data not resolved & got from the server!!!');
+                    console.log(this.user);
                   });
             }
-        });
-    } else {
-      console.log('user data resolved.');
-      this.user = this.tmpUser;
-    }
+          } else {
+            this.user = this.tmpUser;
+            this.ngAfterViewInit_Function();
+            console.log('user data resolved.');
+            console.log(this.user);
+          }
+      });
 
   }
 
@@ -65,22 +90,49 @@ export class UserEditComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
   }
 
+  ngAfterViewInit_Function() {
+    let dt: Date;
+
+    if (this.user.birthdate) {
+      dt = this.user.birthdate;
+    } else {
+      dt = new Date();
+    };
+
+    this.model = { date: {
+      year: dt.getFullYear(),
+      month: dt.getMonth() + 1,
+      day: dt.getDate()
+    }};
+  }
+
 
   onSubmit(f: NgForm) {
-    console.log('=====>> onSubmit()');
-
-    this.usersService
-        .patchUser(this.user)
-        .subscribe(
-          data => {
-            console.log('user patched');
-            this.router.navigate(['-1'], { relativeTo: this.route });
-            // this.router.navigate(['/users']);
-          },
-          err => {
-            this.errorMsg = err;
-          }
-        );
+    if (this.user._id) {
+      this.usersService
+          .patchUser(this.user)
+          .subscribe(
+            data => {
+              console.log('user patched');
+              this.router.navigate(['/users']);
+            },
+            err => {
+              this.errorMsg = err;
+            }
+          );
+    } else {
+      this.usersService
+          .createUser(this.user)
+          .subscribe(
+            data => {
+              console.log('user created!');
+              this.router.navigate(['/users']);
+            },
+            err => {
+              this.errorMsg = err;
+            }
+          );
+    }
   }
 
 

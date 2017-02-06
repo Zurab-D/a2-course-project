@@ -20,17 +20,13 @@ export const Routes = [
 
   { path: 'mail', component: MailComponent,
       children: [
-        {path: '', component: MailListComponent
-        },
+        { path: '', component: MailListComponent },
 
-        {path: 'new', component: MailEditComponent
-        },
+        { path: 'new', component: MailEditComponent },
 
-        {path: ':mailbox', component: MailListComponent
-        },
+        { path: ':mailbox', component: MailListComponent },
 
-        {
-          path: ':mailbox/:id', component: MailEditComponent,
+        { path: ':mailbox/:id', component: MailEditComponent,
           resolve: { letter: LetterResolve }
         },
 
@@ -38,6 +34,8 @@ export const Routes = [
   },
 
   { path: 'users', component: UsersListComponent },
+
+  { path: 'users/new', component: UserEditComponent },
 
   { path: 'users/:id', component: UserEditComponent,
     resolve: { user: UserResolve }

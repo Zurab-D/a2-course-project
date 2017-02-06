@@ -11,10 +11,18 @@ export class ResponseService implements IResponse {
   constructor() { }
 
   public extractData(res: Response): any {
-    if (res !== undefined && typeof res.json !== undefined && res.json() !== undefined) {
-      return res.json();
+    console.log('extractData');
+    console.log(res);
+
+    try {
+      if (res !== undefined && typeof res.json !== undefined && res.json() !== undefined) {
+        console.log('extractData 1');
+        return res.json();
+      }
+    } catch(err) {
+      console.log('extractData 2 : ' + err);
+      return res.toString();
     }
-    return res.toString();
   }
 
   public handleError (error: Response | any): any {

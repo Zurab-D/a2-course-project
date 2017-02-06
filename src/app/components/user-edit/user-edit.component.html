@@ -10,27 +10,36 @@
 
     <div>
       <label>fullName: </label>
-      <input class="full-name" name="fullname" type="text" [(ngModel)]="user.fullName" required>
+      <input class="full-name form-control" name="fullname" type="text" [(ngModel)]="user.fullName" required>
     </div>
 
     <div>
       <label>email: </label>
-      <input class="email" name="email" type="text" [(ngModel)]="user.email" required pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$">
+      <input class="email form-control" name="email" type="text" [(ngModel)]="user.email" required pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$">
     </div>
+
+    <!--<div>
+      <label>birthdate: </label>
+      <input class="birthdate form-control" name="birthdate" type="text" [(ngModel)]="user.birthdate">
+    </div>-->
 
     <div>
       <label>birthdate: </label>
-      <input class="birthdate" name="birthdate" type="text" [(ngModel)]="user.birthdate" >
+      <my-date-picker name="mydate" [options]="myDatePickerOptions" (dateChanged)="onDateChanged($event)" [(ngModel)]="model"></my-date-picker>
     </div>
 
     <div>
       <label>gender: </label>
-      <input type="text" class="gender" name="gender" [(ngModel)]="user.gender" pattern="M|F">
+      <select class="form-control" name="gender" [(ngModel)]="user.gender">
+        <option value="M" [selected]="user.gender === 'M'">Male</option>
+        <option value="F" [selected]="user.gender === 'F'">Female</option>
+        <option value="N" [selected]="user.gender === 'N'">Not defined</option>
+      </select>
     </div>
 
     <div>
       <label>address: </label>
-      <input class="address" name="address" type="text" [(ngModel)]="user.address">
+      <input class="address form-control" name="address" type="text" [(ngModel)]="user.address">
     </div>
   </div>
 
