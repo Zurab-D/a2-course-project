@@ -1,6 +1,6 @@
 /**
  * This form is template-driven
- * Letter editing form (mail-edit) is reactive riven
+ * Letter editing form (mail-edit) is reactive
  */
 
 

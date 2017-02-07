@@ -1,28 +1,28 @@
-<section class="inbox col-sm-10" #myForm>
+<form class="inbox col-sm-10" action="" [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="buttons">
     <span class="label"></span>
-    <button class="btn btn-control btn-send" [ngClass]="{hidden: !!letter._id}" (click)="clickSave(myForm)" >Save</button>
+    <button class="btn btn-control btn-send" type="submit" [ngClass]="{hidden: !!letter._id}">Save</button>
     <button class="btn btn-control btn-back" (click)="clickBack()" >Go back</button>
   </div>
 
   <div class="to">
     <span class="label">to:</span>
     <span class="input">
-      <input class="mail-to" type="text" typeahead value="{{letter.to}}">
+      <input class="mail-to" type="text" typeahead formControlName="to">
     </span>
   </div>
 
   <div class="subject">
     <span class="label">subject:</span>
     <span class="input">
-      <input class="mail-subject" type="text" value="{{letter.subject}}">
+      <input class="mail-subject" type="text" formControlName="subject">
     </span>
   </div>
 
   <div class="body">
     <span class="label">body:</span>
     <span class="input">
-      <textarea class="mail-body" name="letter-body" id="" cols="30" rows="10">{{letter.body}}</textarea>
+      <textarea class="mail-body" formControlName="body" cols="30" rows="10">{{letter.body}}</textarea>
     </span>
   </div>
-</section>
+</form>
