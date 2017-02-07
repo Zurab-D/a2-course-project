@@ -1,6 +1,6 @@
 /**
- * This form is reactive
- * User editing form (user-edit) is template-driven
+ * This myForm is reactive
+ * User editing myForm (user-edit) is template-driven
  */
 
 
@@ -24,7 +24,7 @@ export class MailEditComponent implements OnInit {
   public letter: ILetter = new Letter();
   public tmpLetter: ILetter = undefined;
 
-  public form: FormGroup;
+  public myForm: FormGroup;
 
 
   constructor(private formBuilder: FormBuilder,
@@ -76,13 +76,13 @@ export class MailEditComponent implements OnInit {
 
   createForm(letter?: ILetter) {
     if (letter) {
-      this.form = this.formBuilder.group({
+      this.myForm = this.formBuilder.group({
         'to': this.letter.to,
         'subject': this.letter.subject,
         'body': this.letter.body
       });
     } else {
-      this.form = this.formBuilder.group({
+      this.myForm = this.formBuilder.group({
         'to': undefined,
         'subject': undefined,
         'body': undefined
@@ -92,10 +92,10 @@ export class MailEditComponent implements OnInit {
 
 
   onSubmit(): void {
-    console.log('you submitted value:', this.form.value);
-    this.letter.to = this.form.value.to;
-    this.letter.body = this.form.value.body;
-    this.letter.subject = this.form.value.subject;
+    console.log('you submitted value:', this.myForm.value);
+    this.letter.to = this.myForm.value.to;
+    this.letter.body = this.myForm.value.body;
+    this.letter.subject = this.myForm.value.subject;
     console.log(this.letter);
 
     this.lettersService
@@ -110,17 +110,5 @@ export class MailEditComponent implements OnInit {
   clickBack() {
     this.location.back();
   }
-
-
-  /*clickSave(form: HTMLElement) {
-    this.letter.to = (form.querySelector('.mail-to') as HTMLInputElement).value;
-    this.letter.body = (form.querySelector('.mail-body') as HTMLInputElement).value;
-    this.letter.subject = (form.querySelector('.mail-subject') as HTMLInputElement).value;
-    this.lettersService
-        .saveLetter(this.letter)
-        .subscribe((dat) => {
-          this.router.navigate(['/mail/sent']);
-        });
-  }*/
 
 }

@@ -1,4 +1,4 @@
-<form class="inbox col-sm-10" action="" [formGroup]="form" (ngSubmit)="onSubmit()">
+<form class="inbox col-sm-10" action="" [formGroup]="myForm" (ngSubmit)="onSubmit()">
   <div class="buttons">
     <span class="label"></span>
     <button class="btn btn-control btn-send" type="submit" [ngClass]="{hidden: !!letter._id}">Save</button>
@@ -8,7 +8,7 @@
   <div class="to">
     <span class="label">to:</span>
     <span class="input">
-      <input class="mail-to" type="text" typeahead formControlName="to">
+      <input class="mail-to" type="text" [typeahead]="myForm" formControlName="to">
     </span>
   </div>
 
@@ -26,3 +26,4 @@
     </span>
   </div>
 </form>
+<!--<pre>{{myForm.value | json}}</pre>-->

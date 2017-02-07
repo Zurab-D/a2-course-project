@@ -1,5 +1,6 @@
-import { Directive, OnInit, ElementRef } from '@angular/core';
+import { Directive, OnInit, ElementRef, Input } from '@angular/core';
 import { Observable } from 'rxjs/src/Observable';
+import { FormGroup } from '@angular/forms';
 import 'rxjs/src/add/observable/fromEvent';
 
 // a data provider service
@@ -9,11 +10,13 @@ import { TypeaheadService } from '../../services/typeahead.service';
 @Directive({
   selector: '[typeahead]'
 })
-export class TypedirectiveDirective {
+export class TypedirectiveDirective implements OnInit {
 
   data: Array<string> = [];
   el: HTMLInputElement = this.elementRef.nativeElement;
   ul: HTMLUListElement;
+  // @Input('typeahead') formGroup: FormGroup;
+  @Input() typeahead: FormGroup;
 
 
   constructor(private elementRef: ElementRef,
@@ -75,7 +78,8 @@ export class TypedirectiveDirective {
 
 
   liClickHandler(evt: MouseEvent) {
-    this.el.value = (evt.target as HTMLLIElement).innerText;
+    const txt = (evt.target as HTMLLIElement).innerText;
+    this.typeahead.patchValue({'to': txt});
     this.removeTypeahead();
   }
 
