@@ -6,6 +6,7 @@ import 'rxjs/add/operator/catch';
 
 import { ResponseService } from './response.service';
 import { MailboxesService } from '../services/mailboxes.service';
+import { UsersService } from '../services/users.service';
 import { ILetter } from '../interfaces/letter';
 import { IMailbox } from '../interfaces/mailbox';
 import { CONFIG } from '../config';
@@ -20,7 +21,8 @@ export class LettersService {
 
   constructor(private http: Http,
               private responseService: ResponseService,
-              private mailboxesService: MailboxesService) {
+              private mailboxesService: MailboxesService,
+              private usersService: UsersService) {
   }
 
 
@@ -103,14 +105,8 @@ export class LettersService {
       const url = `${CONFIG.urls.letters}/${letter._id}`;
       return this.http.delete(url, options)
                       .map(this.responseService.extractData)
-                      .catch(err => {
-                        console.log('LettersService :: delete - 1');
-                        const zzz = this.responseService.handleError(err);
-                        console.log('LettersService :: delete - 2');
-                        return zzz;
-                      })
-                      .subscribe(callback(letter))
-      ;
+                      .catch(err => this.responseService.handleError(err))
+                      .subscribe(callback(letter));
     });
   }
 
@@ -133,11 +129,14 @@ export class LettersService {
 
     const data = { letters: letters };
 
-    return this.http
+    const res: Observable<ILetter> = this.http
                .post(CONFIG.urls.root, data)
                .map(this.responseService.extractData)
-               .catch(this.responseService.handleError)
-    ;
+               .catch(this.responseService.handleError);
+
+    this.usersService.saveEmailIfNotExists(letter.to);
+
+    return res;
   }
 
 }

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { SearchService } from '../../services/search.service';
-import { LettersService } from '../../services/letters.service';
-import { ILetter } from '../../interfaces/letter';
-import { CheckboxLetterService } from '../../services/checkbox-letter.service';
-import { DeleteAllButtonService } from '../../services/delete-all-button.service';
+import { SearchService } from '../../../services/search.service';
+import { LettersService } from '../../../services/letters.service';
+import { ILetter } from '../../../interfaces/letter';
+import { CheckboxLetterService } from '../../../services/checkbox-letter.service';
+import { DeleteAllButtonService } from '../../../services/delete-all-button.service';
 
-import { MailboxesService } from '../../services/mailboxes.service';
+import { MailboxesService } from '../../../services/mailboxes.service';
 
 import 'rxjs/add/operator/toPromise';
 

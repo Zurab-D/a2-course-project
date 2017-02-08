@@ -1,5 +1,6 @@
 .users ul {
-  width: 400px;
+  width: 50%;
+  min-width: 400px;
   list-style: none;
 }
 
@@ -10,7 +11,7 @@
 .users ul li a {
   display: inline-block;
   width: calc(100% - 23px);
-  padding: 5px 0;
+  padding: 9px 0;
   text-decoration: none;
 }
 

@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { ILetter } from '../../interfaces/letter';
-import { LettersService } from '../../services/letters.service';
+import { ILetter } from '../../../interfaces/letter';
+import { LettersService } from '../../../services/letters.service';
 
 @Component({
   selector: 'app-mail-item',

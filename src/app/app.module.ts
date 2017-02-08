@@ -6,12 +6,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { MailComponent } from './components/mail/mail.component';
-import { MailListComponent } from './components/mail-list/mail-list.component';
-import { MailItemComponent } from './components/mail-item/mail-item.component';
-import { MailEditComponent } from './components/mail-edit/mail-edit.component';
-import { MailboxesComponent } from './components/mailboxes/mailboxes.component';
+import { MailListComponent } from  './components/mail/mail-list/mail-list.component';
+import { MailItemComponent } from  './components/mail/mail-item/mail-item.component';
+import { MailEditComponent } from  './components/mail/mail-edit/mail-edit.component';
+import { MailboxesComponent } from './components/mail/mailboxes/mailboxes.component';
 
-import { UsersListComponent } from './components/user-list/user-list.component';
+import { UsersListComponent } from './components/users/user-list/user-list.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LogoComponent } from './components/header/logo/logo.component';
@@ -26,19 +26,24 @@ import { UsersService } from './services/users.service';
 import { SearchService } from './services/search.service';
 import { CheckboxLetterService } from './services/checkbox-letter.service';
 import { DeleteAllButtonService } from './services/delete-all-button.service';
+import { LoginService } from './services/login.service';
+import { AuthGuardService } from './services/auth-guard.service';
 
 import { FilterMailboxPipe } from './pipes/filter-mailbox.pipe';
 import { FilterSearchPipe } from './pipes/filter-search.pipe';
 
 import { Routes } from './app.routes';
-import { UserEditComponent } from './components/user-edit/user-edit.component';
+import { UserEditComponent } from './components/users/user-edit/user-edit.component';
 import { LetterResolve } from './resolves/letter.resolve';
 import { UserResolve } from './resolves/user.resolve';
 
-import { TypedirectiveDirective } from './components/mail-edit/typedirective.directive';
+import { TypedirectiveDirective } from './components/mail/mail-edit/typedirective.directive';
 import { TypeaheadService } from './services/typeahead.service';
 
 import { MyDatePickerModule } from 'mydatepicker';
+import { LoginComponent } from './components/login/login.component';
+import { MainComponent } from './components/main.component';
+import { UsersComponent } from './components/users/users.component';
 
 
 @NgModule({
@@ -59,7 +64,10 @@ import { MyDatePickerModule } from 'mydatepicker';
     FooterComponent,
     FilterSearchPipe,
     UserEditComponent,
-    TypedirectiveDirective
+    TypedirectiveDirective,
+    LoginComponent,
+    MainComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +79,7 @@ import { MyDatePickerModule } from 'mydatepicker';
   ],
   providers: [
     LettersService, SearchService, MailboxesService, ResponseService, UsersService, CheckboxLetterService,
-    DeleteAllButtonService, LetterResolve, UserResolve, TypeaheadService
+    DeleteAllButtonService, LetterResolve, UserResolve, TypeaheadService, LoginService, AuthGuardService,
   ],
   bootstrap: [AppComponent]
 })

@@ -4,7 +4,7 @@ import { FormGroup } from '@angular/forms';
 import 'rxjs/src/add/observable/fromEvent';
 
 // a data provider service
-import { TypeaheadService } from '../../services/typeahead.service';
+import { TypeaheadService } from '../../../services/typeahead.service';
 
 
 @Directive({

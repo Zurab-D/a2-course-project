@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { IUser, User } from '../../interfaces/user';
-import { UsersService } from '../../services/users.service';
+import { IUser, User } from '../../../interfaces/user';
+import { UsersService } from '../../../services/users.service';
 
 @Component({
   selector: 'app-user-list',
@@ -27,12 +27,13 @@ export class UsersListComponent implements OnInit {
                               user._id,
                               user.fullName,
                               user.email,
-                              new Date(user.birthdate),
+                              (user.birthdate ? new Date(user.birthdate) : undefined),
                               user.gender,
                               user.address
                             );
                           });
       });
+
   }
 
 
@@ -56,7 +57,6 @@ export class UsersListComponent implements OnInit {
         .deleteUser(user)
         .subscribe(data => {
           console.log(`user deleted`);
-          // const i = this.users.map(item => item._id).indexOf(user._id);
           const i = this.users.indexOf(user);
           if (~i) {
             this.users.splice(i, 1);

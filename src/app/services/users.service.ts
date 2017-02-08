@@ -97,4 +97,22 @@ export class UsersService {
              .catch(this.responseService.handleError);
   }
 
+
+  saveEmailIfNotExists(email) {
+    this.getAll().subscribe(data => {
+      const flExists: boolean = data.map(item => item.email).indexOf(email) >= 0;
+
+      if (!flExists) {
+        this.createUser(<IUser>{
+          _id: undefined,
+          fullName: email,
+          email: email
+        }).subscribe(
+          res => console.log(`=====>> user ${email} saved successfully`),
+          err => console.log(`=====>> Error on saving user ${email} : ${err}`)
+        );
+      }
+    });
+  }
+
 }

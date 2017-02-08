@@ -9,8 +9,8 @@ import { Location } from '@angular/common';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { UsersService } from '../../services/users.service';
-import { User, IUser } from '../../interfaces/user';
+import { UsersService } from '../../../services/users.service';
+import { User, IUser } from '../../../interfaces/user';
 
 import { IMyDateModel, IMyOptions } from 'mydatepicker';
 
@@ -66,7 +66,7 @@ export class UserEditComponent implements OnInit, AfterViewInit {
                       _id: data._id,
                       fullName: data.fullName,
                       email: data.email,
-                      birthdate: new Date(data.birthdate),
+                      birthdate: data.birthdate ? new Date(data.birthdate) : undefined,
                       gender: data.gender,
                       address: data.address
                     };
@@ -88,20 +88,16 @@ export class UserEditComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
   }
 
+
   ngAfterViewInit_Function() {
-    let dt: Date;
-
-    if (this.user.birthdate) {
-      dt = this.user.birthdate;
-    } else {
-      dt = new Date();
+    const dt: Date = this.user.birthdate;
+    if (dt) {
+      this.model = { date: {
+        year: dt.getFullYear(),
+        month: dt.getMonth() + 1,
+        day: dt.getDate()
+      }};
     };
-
-    this.model = { date: {
-      year: dt.getFullYear(),
-      month: dt.getMonth() + 1,
-      day: dt.getDate()
-    }};
   }
 
 

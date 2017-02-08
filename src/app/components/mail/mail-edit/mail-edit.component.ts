@@ -4,21 +4,21 @@
  */
 
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import 'rxjs/add/operator/pluck';
 
-import { LettersService } from '../../services/letters.service';
-import { Letter, ILetter } from '../../interfaces/letter';
+import { LettersService } from '../../../services/letters.service';
+import { Letter, ILetter } from '../../../interfaces/letter';
 
 @Component({
   selector: 'app-mail-edit',
   templateUrl: './mail-edit.component.html',
   styleUrls: ['./mail-edit.component.css']
 })
-export class MailEditComponent implements OnInit {
+export class MailEditComponent implements OnInit, AfterViewInit {
 
   private id: string;
   public letter: ILetter = new Letter();
@@ -32,13 +32,18 @@ export class MailEditComponent implements OnInit {
               private route: ActivatedRoute,
               private location: Location,
               private router: Router) {
+    this.createForm();
+  }
+
+
+  ngAfterViewInit() {
   }
 
 
   ngOnInit() {
     // try to get letter from resolved data
-    // this.tmpLetter = this.route.snapshot.data['letter'];
-    this.route.data.pluck('letter').subscribe((data: ILetter) => this.tmpLetter = data);
+    this.tmpLetter = this.route.snapshot.data['letter'];
+    // this.route.data.pluck('letter').subscribe((data: ILetter) => this.tmpLetter = data);
 
     if (!this.tmpLetter) {
       console.log('letter not resolved -> go get it from server!!!');
@@ -53,12 +58,15 @@ export class MailEditComponent implements OnInit {
               this.lettersService
                   .getById(this.id)
                   .subscribe(data => {
+                    console.log('=====>> MailEdit :: subscribe 1');
                     this.letter = data;
+                    console.log('=====>> MailEdit :: subscribe 2');
                     /**
                      * ЗДЕСЬ приложение падает - formGroup expects a FormGroup instance. Please pass one in.
                      * т.е. если мы пытаемся открыть по прямой ссылке письмо
                      */
-
+                    this.createForm(data);
+                    console.log('=====>> MailEdit :: subscribe 3');
                   });
             } else {
               this.createForm();
@@ -75,6 +83,7 @@ export class MailEditComponent implements OnInit {
   }
 
   createForm(letter?: ILetter) {
+    console.log('=====>> createForm()');
     if (letter) {
       this.myForm = this.formBuilder.group({
         'to': this.letter.to,
@@ -106,6 +115,7 @@ export class MailEditComponent implements OnInit {
         err => console.log('ERROR: ' + err)
         );
   }
+
 
   clickBack() {
     this.location.back();
