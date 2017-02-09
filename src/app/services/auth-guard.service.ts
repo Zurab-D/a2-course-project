@@ -5,6 +5,8 @@ import { LoginService } from './login.service';
 @Injectable()
 export class AuthGuardService implements CanActivate, CanActivateChild {
 
+  private _initialUrl: string;
+
   constructor(private loginService: LoginService,
               private router: Router) {
   }
@@ -24,6 +26,8 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
   }
 
   checkLogin(url: string): boolean {
+    this.initialUrl = url;
+
     if (this.loginService.isAuthorised) {
         return true;
     }
@@ -34,6 +38,14 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
     this.router.navigate(['/login']);
 
     return false;
+  }
+
+  set initialUrl(url: string) {
+    this._initialUrl = url;
+  }
+
+  get initialUrl(): string {
+    return this._initialUrl;
   }
 
 }

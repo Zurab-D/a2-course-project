@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { LoginService } from '../../services/login.service';
+import { AuthGuardService } from '../../services/auth-guard.service';
 
 
 @Component({
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   constructor(private formBuilder: FormBuilder,
               private loginService: LoginService,
-              private router: Router)
+              private router: Router,
+              private authGuardService: AuthGuardService)
   {
     this.authorised = this.loginService.isAuthorised;
 
@@ -39,7 +41,11 @@ export class LoginComponent implements OnInit, AfterViewInit {
         .login(this.loginForm.value.nick, this.loginForm.value.pass)
         .subscribe(res => {
           this.authorised = this.loginService.isAuthorised;
-          this.router.navigate(['']);
+          if (this.authGuardService.initialUrl && this.authGuardService.initialUrl.replace('/', '')) {
+            this.router.navigate([this.authGuardService.initialUrl]);
+          } else {
+            this.router.navigate(['/mail/inbox']);
+          }
         });
   }
 

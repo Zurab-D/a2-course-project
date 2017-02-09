@@ -5,13 +5,13 @@
 
 
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import 'rxjs/add/operator/pluck';
 
 import { LettersService } from '../../../services/letters.service';
 import { Letter, ILetter } from '../../../interfaces/letter';
+import { DeleteAllButtonService } from '../../../services/delete-all-button.service';
 
 @Component({
   selector: 'app-mail-edit',
@@ -29,8 +29,8 @@ export class MailEditComponent implements OnInit, AfterViewInit {
 
   constructor(private formBuilder: FormBuilder,
               private lettersService: LettersService,
+              private deleteAllButtonService: DeleteAllButtonService,
               private route: ActivatedRoute,
-              private location: Location,
               private router: Router) {
     this.createForm();
   }
@@ -53,20 +53,12 @@ export class MailEditComponent implements OnInit, AfterViewInit {
           .params
           .subscribe(params => {
             this.id = params['id'] || '';
-            console.log(`=====>> MailEdit :: this.id = ${this.id}`);
             if (this.id) {
               this.lettersService
                   .getById(this.id)
                   .subscribe(data => {
-                    console.log('=====>> MailEdit :: subscribe 1');
                     this.letter = data;
-                    console.log('=====>> MailEdit :: subscribe 2');
-                    /**
-                     * ЗДЕСЬ приложение падает - formGroup expects a FormGroup instance. Please pass one in.
-                     * т.е. если мы пытаемся открыть по прямой ссылке письмо
-                     */
-                    this.createForm(data);
-                    console.log('=====>> MailEdit :: subscribe 3');
+                    this.createForm(this.letter);
                   });
             } else {
               this.createForm();
@@ -80,10 +72,21 @@ export class MailEditComponent implements OnInit, AfterViewInit {
     /**
      * ЗДЕСЬ мне не нравится что вызов this.createForm() нужно прописывать дважды, но как сделать иначе?
      */
+
+    // ------------------------------------------------------------
+    const s$ = this.deleteAllButtonService.subscribe(() => {
+      const deleting: ILetter[] = [this.letter];
+
+      this.lettersService
+        .delete(deleting, res => {
+          this.lettersService.flagRefresh = true;
+          s$.unsubscribe();
+          this.clickCancel();
+        });
+    });
   }
 
   createForm(letter?: ILetter) {
-    console.log('=====>> createForm()');
     if (letter) {
       this.myForm = this.formBuilder.group({
         'to': this.letter.to,
@@ -101,11 +104,9 @@ export class MailEditComponent implements OnInit, AfterViewInit {
 
 
   onSubmit(): void {
-    console.log('you submitted value:', this.myForm.value);
     this.letter.to = this.myForm.value.to;
     this.letter.body = this.myForm.value.body;
     this.letter.subject = this.myForm.value.subject;
-    console.log(this.letter);
 
     this.lettersService
         .saveLetter(this.letter)
@@ -117,8 +118,11 @@ export class MailEditComponent implements OnInit, AfterViewInit {
   }
 
 
-  clickBack() {
-    this.location.back();
+  clickCancel() {
+    const arr = this.router.url.split('/').filter(item => !!item);
+    const destUrl = arr.slice(0, arr.length - 1).join('/');
+
+    this.router.navigate([`/${destUrl}`]);
   }
 
 }

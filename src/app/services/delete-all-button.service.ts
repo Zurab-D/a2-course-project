@@ -11,7 +11,11 @@ export class DeleteAllButtonService {
   }
 
   subscribe(callback) {
-    this.btnDeleteAll$.subscribe(callback);
+    return this.btnDeleteAll$.subscribe(callback);
+  }
+
+  unsubscribe() {
+    this.btnDeleteAll$.unsubscribe();
   }
 
 }

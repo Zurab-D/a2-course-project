@@ -1,9 +1,9 @@
 <section class="users">
-  <button class="btn btn-control btn-add" (click)="clickAdd()">New user</button>
+  <button class="btn btn-control btn-add" type="button" (click)="clickAdd()">New user</button>
   <ul>
     <li *ngFor="let user of users">
       <a [routerLink]="user._id" (click)="userClicked(user)">{{user.fullName}} :: {{user.email}} :: {{user.birthdate ? user.birthdate.toLocaleDateString() : '--'}}</a>
-      <button type="button" class="btn btn-default btn-xs" (click)="clickXBtn(user)">x</button>
+      <button class="btn btn-default btn-xs" type="button" (click)="clickXBtn(user)">x</button>
     </li>
   </ul>
 </section>

@@ -5,7 +5,6 @@
 
 
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { Location } from '@angular/common';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -40,7 +39,6 @@ export class UserEditComponent implements OnInit, AfterViewInit {
 
   constructor(private usersService: UsersService,
               private route: ActivatedRoute,
-              private location: Location,
               private router: Router) {
     this.tmpUser = this.route.snapshot.data['user'];
   }
@@ -107,7 +105,6 @@ export class UserEditComponent implements OnInit, AfterViewInit {
           .patchUser(this.user)
           .subscribe(
             data => {
-              console.log('user patched');
               this.router.navigate(['/users']);
             },
             err => {
@@ -119,7 +116,6 @@ export class UserEditComponent implements OnInit, AfterViewInit {
           .createUser(this.user)
           .subscribe(
             data => {
-              console.log('user created!');
               this.router.navigate(['/users']);
             },
             err => {
@@ -131,9 +127,11 @@ export class UserEditComponent implements OnInit, AfterViewInit {
 
 
   clickBack() {
-    // const prevRouterState = this.router.url.split('/').filter(item => !!item).splice(-2, 1);
-    // this.router.navigate(['/users']);
-    this.location.back();
+    /*const arr = this.router.url.split('/').filter(item => !!item);
+    const destUrl = arr.slice(0, arr.length - 1).join('/');*/
+
+    const destUrl = '/users';
+    this.router.navigate([destUrl]);
   }
 
 }

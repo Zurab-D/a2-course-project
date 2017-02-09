@@ -2,7 +2,7 @@
   <div class="input-group">
     <input type="text" class="form-control" placeholder="Search for email..." (keypress)="searchLetters($event, searchInput.value)" #searchInput>
     <span class="input-group-btn">
-      <button class="btn btn-main" (click)="searchLetters($event, searchInput.value)">
+      <button class="btn btn-main" type="button" (click)="searchLetters($event, searchInput.value)">
         <span class="glyphicon glyphicon-search"></span>
       </button>
     </span>

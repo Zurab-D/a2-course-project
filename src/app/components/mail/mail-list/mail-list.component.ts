@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { SearchService } from '../../../services/search.service';
@@ -15,12 +15,14 @@ import 'rxjs/add/operator/toPromise';
 @Component({
   selector: 'app-mail-list',
   templateUrl: './mail-list.component.html',
-  styleUrls: ['./mail-list.component.css']
+  styleUrls: ['./mail-list.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class MailListComponent implements OnInit {
   private letters: ILetter[] = [];
   mailboxValue = '';
   searchValue = '';
+
 
   constructor(private lettersService: LettersService,
               private route: ActivatedRoute,
@@ -29,6 +31,7 @@ export class MailListComponent implements OnInit {
               private deleteAllButtonService: DeleteAllButtonService,
               private mailboxesService: MailboxesService) {
   }
+
 
   ngOnInit() {
 
@@ -84,7 +87,18 @@ export class MailListComponent implements OnInit {
           });
         });
 
+    if (this.lettersService.flagRefresh) {
+      this.letters = [];
+      this.lettersService
+          .getAll()
+          .subscribe(data => {
+            this.letters = data;
+            this.letters.forEach(letter => letter._checked = false);
+          });
+    }
+
   }
+
 
   get mailboxId(): string {
     return this.mailboxesService.getMailboxId(this.mailboxValue);
@@ -104,4 +118,5 @@ export class MailListComponent implements OnInit {
         })()
         );
   }
+
 }

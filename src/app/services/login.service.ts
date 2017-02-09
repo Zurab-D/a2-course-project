@@ -29,8 +29,6 @@ export class LoginService {
 
 
   get isAuthorised(): boolean {
-    console.log(`=====>> LoginService : isAuthorised : ${this.auth}`);
-
     return this.auth;
   }
 

@@ -18,6 +18,8 @@ export class LettersService {
 
   currentLetter: ILetter;
 
+  private _flagRefresh: boolean = false;
+
 
   constructor(private http: Http,
               private responseService: ResponseService,
@@ -137,6 +139,18 @@ export class LettersService {
     this.usersService.saveEmailIfNotExists(letter.to);
 
     return res;
+  }
+
+
+  set flagRefresh(flag) {
+    this._flagRefresh = flag;
+  }
+
+
+  get flagRefresh(): boolean {
+    const flag: boolean = this._flagRefresh;
+    this._flagRefresh = false;
+    return flag;
   }
 
 }

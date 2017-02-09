@@ -108,8 +108,8 @@ export class UsersService {
           fullName: email,
           email: email
         }).subscribe(
-          res => console.log(`=====>> user ${email} saved successfully`),
-          err => console.log(`=====>> Error on saving user ${email} : ${err}`)
+          null,
+          err => console.log(`Error on saving user ${email} : ${err}`)
         );
       }
     });
