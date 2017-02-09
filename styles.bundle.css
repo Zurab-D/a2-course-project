@@ -1,0 +1,2 @@
+.typeahead{position:absolute;margin-left:10px;padding:5px;list-style:none;min-width:300px;width:30%;background-color:#fff;box-shadow:4px 4px 4px 0 rgba(50,50,50,.75);border:1px solid #aaa;border-radius:2px 2px 5px 5px;visibility:hidden}.typeahead li{font-family:Arial,Consolas,sans-serif;font-size:13.333px}.typeahead li:hover{background:#eee;cursor:default}.typeahead li:not(:first-child){padding-top:4px}.typeahead li:not(:last-child){padding-bottom:4px}
+/*# sourceMappingURL=styles.bundle.map*/
