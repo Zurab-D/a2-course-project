@@ -1,10 +1,10 @@
 <div class="content" *ngIf="!authorised">
   <h3>Sign in:</h3>
-  <h3><small>(dev: enter equal values for nick & pass)</small></h3>
+  <h3><small>(hint: enter equal values for nick & pass)</small></h3>
   <form class="login col-sm-4-" action="" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <fieldset>
-      <input class="nick" placeholder="Your nickname" formControlName="nick">
-      <input class="pass" placeholder="Your password" formControlName="pass">
+      <label>name:</label><input class="nick" placeholder="Your nickname" formControlName="nick">
+      <label>password:</label><input class="pass" placeholder="Your password" formControlName="pass">
       <button type="submit">Login</button>
     </fieldset>
   </form>
