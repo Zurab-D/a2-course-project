@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { SearchService } from '../../../services/search.service';
@@ -15,8 +15,7 @@ import 'rxjs/add/operator/toPromise';
 @Component({
   selector: 'app-mail-list',
   templateUrl: './mail-list.component.html',
-  styleUrls: ['./mail-list.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./mail-list.component.css']
 })
 export class MailListComponent implements OnInit {
   private letters: ILetter[] = [];
@@ -35,12 +34,7 @@ export class MailListComponent implements OnInit {
 
   ngOnInit() {
 
-    this.lettersService
-        .getAll()
-        .subscribe(data => {
-          this.letters = data;
-          this.letters.forEach(letter => letter._checked = false);
-        });
+    this.letters = this.route.snapshot.data['mailList'];
 
     // get mailbox name from the router params
     this.route
@@ -87,6 +81,12 @@ export class MailListComponent implements OnInit {
           });
         });
 
+    this.refreshIfFlag();
+
+  }
+
+
+  refreshIfFlag() {
     if (this.lettersService.flagRefresh) {
       this.letters = [];
       this.lettersService
@@ -96,7 +96,6 @@ export class MailListComponent implements OnInit {
             this.letters.forEach(letter => letter._checked = false);
           });
     }
-
   }
 
 
@@ -110,13 +109,13 @@ export class MailListComponent implements OnInit {
   }
 
 
+  // got clicked event from mail-item
   mailItemClicked() {
     this.checkboxLetterService
         .informAllChecked((() => {
           const filtered = this.letters.filter(letter => letter.mailbox === this.mailboxId);
           return filtered.length > 0 && filtered.every(letter => letter._checked);
-        })()
-        );
+        })());
   }
 
 }

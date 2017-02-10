@@ -11,18 +11,14 @@ import { UserEditComponent } from  './components/users/user-edit/user-edit.compo
 
 import { SettingsComponent } from './components/settings/settings.component';
 import { LetterResolve } from './resolves/letter.resolve';
+import { MailListResolve } from './resolves/mail-list.resolve';
+import { MailboxesResolve } from './resolves/mailboxes.resolve';
 import { UserResolve } from './resolves/user.resolve';
 
 import { AuthGuardService } from './services/auth-guard.service';
 
 
 export const Routes = [
-  /*{ path: '',
-    // redirectTo: 'mail/Inbox', pathMatch: 'full',
-    redirectTo: 'mail', pathMatch: 'full',
-    // redirectTo: 'login', pathMatch: 'full'
-  },*/
-
   { path: 'login', component: LoginComponent },
 
   { path: '', component: MainComponent,
@@ -31,13 +27,16 @@ export const Routes = [
     canActivateChild : [AuthGuardService],
     children: [
       { path: 'mail', component: MailComponent,
+          resolve: { mailboxes: MailboxesResolve },
           children: [
             { path: 'new', component: MailEditComponent },
 
-            { path: ':mailbox', component: MailListComponent },
+            { path: ':mailbox', component: MailListComponent,
+              resolve: { mailList: MailListResolve },
+            },
 
             { path: ':mailbox/:id', component: MailEditComponent,
-              resolve: { letter: LetterResolve }
+              resolve: { letter: LetterResolve },
             },
           ]
       },

@@ -33,7 +33,7 @@ export class MailboxesService {
     if (mailbox) {
       mailbox = mailbox.toLowerCase();
       for (let i = 0; i < this.mailboxes.length; i++) {
-        if (this.mailboxes[i].title.toLowerCase() === mailbox.toLowerCase()) {
+        if (this.mailboxes[i].title.toLowerCase() === mailbox) {
           return this.mailboxes[i]._id;
         }
       }

@@ -35,6 +35,8 @@ import { FilterSearchPipe } from './pipes/filter-search.pipe';
 import { Routes } from './app.routes';
 import { UserEditComponent } from './components/users/user-edit/user-edit.component';
 import { LetterResolve } from './resolves/letter.resolve';
+import { MailListResolve } from './resolves/mail-list.resolve';
+import { MailboxesResolve } from './resolves/mailboxes.resolve';
 import { UserResolve } from './resolves/user.resolve';
 
 import { TypedirectiveDirective } from './components/mail/mail-edit/typedirective.directive';
@@ -79,7 +81,8 @@ import { UsersComponent } from './components/users/users.component';
   ],
   providers: [
     LettersService, SearchService, MailboxesService, ResponseService, UsersService, CheckboxLetterService,
-    DeleteAllButtonService, LetterResolve, UserResolve, TypeaheadService, LoginService, AuthGuardService,
+    DeleteAllButtonService, LetterResolve, MailListResolve, UserResolve, TypeaheadService, LoginService,
+    AuthGuardService, MailboxesResolve,
   ],
   bootstrap: [AppComponent]
 })

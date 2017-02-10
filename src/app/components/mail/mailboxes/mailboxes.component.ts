@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { IMailbox } from '../../../interfaces/mailbox';
-import { MailboxesService } from '../../../services/mailboxes.service';
 
 @Component({
   selector: 'app-mailboxes',
@@ -12,16 +11,13 @@ import { MailboxesService } from '../../../services/mailboxes.service';
 export class MailboxesComponent implements OnInit {
   mailboxes: IMailbox[];
 
-  constructor(private mailboxesService: MailboxesService,
+  constructor(private route: ActivatedRoute,
               private router: Router) {
   }
 
   ngOnInit() {
-    this.mailboxesService
-      .getAll()
-      .subscribe(mailboxes => {
-        this.mailboxes = mailboxes.sort((a, b) => a.title > b.title ? 1 : -1);
-      });
+    this.mailboxes = this.route.snapshot.data['mailboxes']
+                                        .sort((a, b) => a.title > b.title ? 1 : -1);
   }
 
   clickCompose() {

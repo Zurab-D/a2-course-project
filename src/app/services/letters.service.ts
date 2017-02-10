@@ -3,6 +3,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/first';
 
 import { ResponseService } from './response.service';
 import { MailboxesService } from '../services/mailboxes.service';
@@ -32,6 +33,7 @@ export class LettersService {
     return this.http
       .get(CONFIG.urls.letters)
       .map(this.responseService.extractData)
+      .first()
       .catch(this.responseService.handleError)
     ;
   }

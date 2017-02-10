@@ -12,6 +12,7 @@ import { LoginService } from '../services/login.service';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
+
   allChecked: boolean = false;
 
 
@@ -23,7 +24,7 @@ export class MainComponent implements OnInit {
 
 
   ngOnInit() {
-    this.checkboxLetterService.examineAllChecked(flag => this.allChecked = !!flag);
+    this.checkboxLetterService.examineAllChecked(flag => this.allChecked = flag);
   }
 
 
@@ -34,17 +35,14 @@ export class MainComponent implements OnInit {
   }
 
 
-  isAllChecked() {
-    return this.allChecked;
-  }
-
-
   checkAll(evt) {
     this.checkboxLetterService.click(evt.target.checked);
+    this.allChecked = evt.target.checked;
   }
 
 
   clickLogout() {
     this.loginService.logout();
   }
+
 }

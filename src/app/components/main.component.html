@@ -25,7 +25,7 @@
       <ul class="control-list list-inline">
         <li>
           <button class="btn btn-control" type="button">
-            <input type="checkbox" class="mail-select" [checked]="isAllChecked()" (change)="checkAll($event)" ngModel #cb="ngModel">
+            <input type="checkbox" class="mail-select" [checked]="allChecked" (change)="checkAll($event)" ngModel #cb="ngModel">
             <span class="caret"></span>
           </button>
         </li>

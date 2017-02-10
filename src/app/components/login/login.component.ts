@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
           if (this.authGuardService.initialUrl && this.authGuardService.initialUrl.replace('/', '')) {
             this.router.navigate([this.authGuardService.initialUrl]);
           } else {
-            this.router.navigate(['/mail/inbox']);
+            this.router.navigate(['/mail/Inbox']);
           }
         });
   }

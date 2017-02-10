@@ -3,9 +3,7 @@
   <div class="people col-sm-3">
     <ul class="mail-icons list-inline">
       <li>
-        <input type="checkbox" class="mail-select" [checked]="!!letter._checked" (click)="click(letter)" >
-        <!--<input type="checkbox" class="mail-select" ngModel #c="ngModel" [checked]="!!letter._checked">-->
-        <!--<input type="checkbox" class="mail-select" ngModel #c="ngModel" (click)="click(letter)">-->
+        <input type="checkbox" class="mail-select" [checked]="!!letter._checked" (click)="cbClick(letter)" >
       </li>
       <li>
         <span class="glyphicon glyphicon-star-empty"></span>
