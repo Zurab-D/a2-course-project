@@ -1,5 +1,5 @@
 footer .copyright {
-  position: absolute;
+  position: fixed;
   padding: 5px 10px;
   height: 23px;
   bottom: 0px;
@@ -11,4 +11,3 @@ footer .copyright {
 footer .copyright span {
   background-color: lightgray;
 }
-
