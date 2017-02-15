@@ -1,3 +1,11 @@
 section {
   margin-top: 5px;
 }
+
+.email-item {
+  padding: 0;
+}
+
+.email-item:hover {
+  background-color: #e5e5e5;
+}

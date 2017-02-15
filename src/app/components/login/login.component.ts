@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { LoginService } from '../../services/login.service';
 import { AuthGuardService } from '../../services/auth-guard.service';
@@ -20,8 +20,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
   constructor(private formBuilder: FormBuilder,
               private loginService: LoginService,
               private router: Router,
-              private authGuardService: AuthGuardService)
-  {
+              private authGuardService: AuthGuardService) {
     this.authorised = this.loginService.isAuthorised;
 
     this.loginForm = this.formBuilder.group({

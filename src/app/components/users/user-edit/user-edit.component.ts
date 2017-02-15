@@ -24,9 +24,9 @@ export class UserEditComponent implements OnInit, AfterViewInit {
   private id: string;
   public user: IUser = new User();
   public tmpUser: IUser = undefined;
-  private errorMsg;
+  public errorMsg;
 
-  private model: Object;
+  public model: Object;
 
 
   myDatePickerOptions: IMyOptions = {

@@ -47,7 +47,7 @@ export class TypedirectiveDirective implements OnInit {
     if (!this.ul) {
       this.ul = document.createElement('ul');
       this.ul.className = 'typeahead';
-      this.insertAfter(this.el, this.ul)
+      this.insertAfter(this.el, this.ul);
     }
   }
 

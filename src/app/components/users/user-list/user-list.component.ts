@@ -57,7 +57,7 @@ export class UsersListComponent implements OnInit {
         .deleteUser(user)
         .subscribe(data => {
           const i = this.users.indexOf(user);
-          if (~i) {
+          if (i >= 0) {
             this.users.splice(i, 1);
           }
         });

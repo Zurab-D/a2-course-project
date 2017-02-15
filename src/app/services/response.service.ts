@@ -15,7 +15,7 @@ export class ResponseService implements IResponse {
       if (res !== undefined && typeof res.json !== undefined && res.json() !== undefined) {
         return res.json();
       }
-    } catch(err) {
+    } catch (err) {
       return res.toString();
     }
   }

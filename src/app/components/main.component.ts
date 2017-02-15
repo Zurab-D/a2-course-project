@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { CheckboxLetterService } from '../services/checkbox-letter.service';
 import { DeleteAllButtonService } from '../services/delete-all-button.service';

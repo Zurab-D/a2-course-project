@@ -76,7 +76,7 @@ export class LettersService {
           body: lettersData[i].body,
           _checked: undefined
         };
-        letter.mailbox = mailbox._id; //'587c82e49de15a250410f253';
+        letter.mailbox = mailbox._id;
         letters.push(letter);
       }
     }

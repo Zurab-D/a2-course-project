@@ -16,6 +16,8 @@
 + 11. При отправке письма на адрес, которого нет в адресной книге - добавить в список
 + 12. Авторизация в приложении
   13. Юнит-тесты
+  		для тестов ставим пакеты:
+  			npm i karma jasmine jasmine-core karma-jasmine karma-chrome-launcher
 
 Вариант дизайна - https://github.com/khalifenizar/gmail-clone
 API - http://test-api.javascript.ru/v1

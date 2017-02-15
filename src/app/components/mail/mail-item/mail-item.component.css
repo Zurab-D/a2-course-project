@@ -2,13 +2,23 @@
   cursor: pointer;
 }
 
+.mail-icons {
+  padding: 10px 0;
+  cursor: pointer;
+}
+
 .people {
   padding-right: 0;
 }
 
 .people-names {
+  padding: 10px 0;
   float: right;
   display: inline-block;
   vertical-align: top;
   width: calc(100% - 85px);
+}
+
+.message {
+  padding: 10px 0;
 }

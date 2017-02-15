@@ -6,7 +6,7 @@
 
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import 'rxjs/add/operator/pluck';
 
 import { LettersService } from '../../../services/letters.service';
