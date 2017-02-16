@@ -3,16 +3,15 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+// import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
-import { UsersService } from '../../../services/users.service';
-import { UsersListComponent } from './user-list.component';
 import { Router, RouterStub, RouterLinkStubDirective, RouterOutletStubComponent } from '../../../../testing';
-
-
 import { HttpModule } from '@angular/http';
+
 import { ResponseService } from '../../../services/response.service';
 import { IUser, User } from '../../../interfaces/user';
+import { UsersService } from '../../../services/users.service';
+import { UsersListComponent } from './user-list.component';
 
 let spy: jasmine.Spy;
 let usersService: UsersService;
@@ -39,8 +38,8 @@ describe('UsersListComponent', () => {
         UsersService,
         ResponseService,
         { provide: Router, useClass: RouterStub }
-      ],
-      schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+      ]
+      // schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
     })
     .compileComponents();
   }));

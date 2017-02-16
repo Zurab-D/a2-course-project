@@ -4,7 +4,8 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { UsersComponent } from './users.component';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { RouterOutletStubComponent } from '../../../testing';
+
 
 describe('UsersComponent', () => {
   let component: UsersComponent;
@@ -12,8 +13,7 @@ describe('UsersComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UsersComponent ],
-      schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+      declarations: [ UsersComponent, RouterOutletStubComponent ]
     })
     .compileComponents();
   }));

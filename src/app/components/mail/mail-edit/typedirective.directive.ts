@@ -15,7 +15,6 @@ export class TypedirectiveDirective implements OnInit {
   data: Array<string> = [];
   el: HTMLInputElement = this.elementRef.nativeElement;
   ul: HTMLUListElement;
-  // @Input('typeahead') formGroup: FormGroup;
   @Input() typeahead: FormGroup;
 
 

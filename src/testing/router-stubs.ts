@@ -1,23 +1,24 @@
  // export for convenience.
-export { ActivatedRoute, Router, RouterLink, RouterOutlet} from '@angular/router';
+export { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 
-import { Component, Directive, Injectable, Input } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Type } from '@angular/core';
+import { Component, Directive, Injectable, Input, HostListener } from '@angular/core';
 import { NavigationExtras } from '@angular/router';
+
 
 @Directive({
   selector: '[routerLink]',
-  host: {
-    '(click)': 'onClick()'
-  }
 })
 export class RouterLinkStubDirective {
   @Input('routerLink') linkParams: any;
   navigatedTo: any = null;
 
-  onClick() {
+  @HostListener('click') onClick() {
     this.navigatedTo = this.linkParams;
   }
 }
+
 
 @Component({selector: 'router-outlet', template: ''})
 export class RouterOutletStubComponent { }
@@ -31,9 +32,9 @@ export class RouterStub {
 // Only implements params and part of snapshot.params
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
+
 @Injectable()
 export class ActivatedRouteStub {
-
   // ActivatedRoute.params is Observable
   private subject = new BehaviorSubject(this.testParams);
   params = this.subject.asObservable();
@@ -46,9 +47,18 @@ export class ActivatedRouteStub {
     this.subject.next(params);
   }
 
+  // Test data
+  private _testData: {};
+  get testData() { return this._testData; }
+  set testData(data: {}) {
+    this._testData = data;
+    this.subject.next(data);
+  }
+
   // ActivatedRoute.snapshot.params
   get snapshot() {
-    return { params: this.testParams };
+    // return { params: this.testParams };
+    return { data: this.testData };
   }
 }
 

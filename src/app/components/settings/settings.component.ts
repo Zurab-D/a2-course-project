@@ -21,13 +21,11 @@ export class SettingsComponent implements OnInit {
   }
 
 
-  genLetters(e) {
-    this.lettersService.createLettersBunch()/*.subscribe(
-      null,
-      null,
-      () => { window.alert('Letters created succesfully'); }
-    )*/;
+  genLetters() {
+    this.lettersService.createLettersBunch();
   }
+
+
   delAllLetters() {
     if (window.confirm('Delete all letters?')) {
       this.lettersService

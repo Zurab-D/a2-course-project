@@ -25,13 +25,13 @@
       <ul class="control-list list-inline">
         <li>
           <button class="btn btn-control" type="button">
-            <input type="checkbox" class="mail-select" [checked]="allChecked" (change)="checkAll($event)" ngModel #cb="ngModel">
+            <input type="checkbox" class="mail-select" [checked]="allChecked" (change)="checkAll($event)" ngModel #cb="ngModel" [disabled]="!currentRouteIsMail">
             <span class="caret"></span>
           </button>
         </li>
 
         <li>
-          <button class="btn btn-control" (click)="deleteCheckedMail()" title="Delete email">
+          <button class="btn btn-control" (click)="deleteCheckedMail()" title="Delete email" [disabled]="!currentRouteIsMail">
             <span class="glyphicon glyphicon-trash"></span>
           </button>
         </li>

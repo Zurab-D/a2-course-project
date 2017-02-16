@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 
 import { CheckboxLetterService } from '../services/checkbox-letter.service';
 import { DeleteAllButtonService } from '../services/delete-all-button.service';
@@ -14,9 +14,10 @@ import { LoginService } from '../services/login.service';
 export class MainComponent implements OnInit {
 
   allChecked: boolean = false;
-
+  currentRouteIsMail: boolean = false;
 
   constructor(private router: Router,
+              private route: ActivatedRoute,
               private checkboxLetterService: CheckboxLetterService,
               private deleteAllButtonService: DeleteAllButtonService,
               private loginService: LoginService) {
@@ -25,6 +26,12 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
     this.checkboxLetterService.examineAllChecked(flag => this.allChecked = flag);
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.currentRouteIsMail = this.router.url.split('/').filter(item => item).indexOf('mail') > -1;
+      }
+    });
   }
 
 

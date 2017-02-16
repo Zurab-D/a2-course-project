@@ -4,7 +4,7 @@
  */
 
 
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -19,7 +19,7 @@ import { IMyDateModel, IMyOptions } from 'mydatepicker';
   templateUrl: './user-edit.component.html',
   styleUrls: ['./user-edit.component.css']
 })
-export class UserEditComponent implements OnInit, AfterViewInit {
+export class UserEditComponent implements OnInit {
 
   private id: string;
   public user: IUser = new User();
@@ -37,10 +37,10 @@ export class UserEditComponent implements OnInit, AfterViewInit {
     this.user.birthdate = new Date(event.jsdate);
   }
 
+
   constructor(private usersService: UsersService,
               private route: ActivatedRoute,
               private router: Router) {
-    this.tmpUser = this.route.snapshot.data['user'];
   }
 
 
@@ -49,41 +49,37 @@ export class UserEditComponent implements OnInit, AfterViewInit {
     // get user from resolved data
     this.tmpUser = this.route.snapshot.data['user'];
 
-    this.route
-        .params
-        .subscribe(params => {
-          this.id = params['id'] || '';
-          if (!this.tmpUser) {
-            // user data not resolved. go get user data from the server.
-            // this happens when user comes here by direct link (previously saved, for example)
-            if (this.id) {
-              this.usersService
-                  .getById(this.id)
-                  .subscribe(data => {
-                    this.user = {
-                      _id: data._id,
-                      fullName: data.fullName,
-                      email: data.email,
-                      birthdate: data.birthdate ? new Date(data.birthdate) : undefined,
-                      gender: data.gender,
-                      address: data.address
-                    };
+    if (!this.tmpUser) {
+      this.route
+          .params
+          .subscribe(params => {
+            this.id = params['id'] || '';
+              // user data not resolved. go get user data from the server.
+              // this happens when user comes here by direct link (previously saved, for example)
+              if (this.id) {
+                this.usersService
+                    .getById(this.id)
+                    .subscribe(data => {
+                        this.user = {
+                          _id: data._id,
+                          fullName: data.fullName,
+                          email: data.email,
+                          birthdate: data.birthdate ? new Date(data.birthdate) : undefined,
+                          gender: data.gender,
+                          address: data.address
+                        };
 
-                    this.ngAfterViewInit_Function();
-                    console.log('user data not resolved & got from the server!!!');
-                  });
-            }
-          } else {
-            this.user = this.tmpUser;
-            this.ngAfterViewInit_Function();
-            console.log('user data resolved.');
-          }
-      });
+                        this.ngAfterViewInit_Function();
+                        console.log('user data not resolved & got from the server!!!');
+                    });
+              }
+          });
+    } else {
+      this.user = this.tmpUser;
+      this.ngAfterViewInit_Function();
+      console.log('user data resolved.');
+    }
 
-  }
-
-
-  ngAfterViewInit() {
   }
 
 
@@ -127,11 +123,9 @@ export class UserEditComponent implements OnInit, AfterViewInit {
 
 
   clickBack() {
-    /*const arr = this.router.url.split('/').filter(item => !!item);
-    const destUrl = arr.slice(0, arr.length - 1).join('/');*/
-
     const destUrl = '/users';
     this.router.navigate([destUrl]);
   }
+
 
 }

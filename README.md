@@ -43,16 +43,12 @@ ng e2e
 Before running the tests make sure you are serving the app via `ng serve`.
 
 
-#### How to deploy to Github Pages articles:
-    First of all read this article: http://developer.telerik.com/featured/quick-angular-2-hosting-angular-cli-github-pages
-    and this, if prev one doesn't help: http://colinmorris.github.io/blog/ng2-poor-mans-deploy
-    After all preparations run `ng github-pages:deploy` to deploy to Github Pages.
-
-
 ## In this project I used
 - Bootstrap framework (getbootstrap.com)
-- and Datepicker for Bootstrap (http://www.eyecon.ro/bootstrap-datepicker , http://www.eyecon.ro/bootstrap-datepicker/datepicker.zip)
+- and "mydatepicker" - Angular 2 date picker (https://github.com/kekeh/mydatepicker)
 
 
-## License
-MIT
+### How to deploy to Github Pages articles:
+    - First of all read this article: http://developer.telerik.com/featured/quick-angular-2-hosting-angular-cli-github-pages
+    - and this, if prev one doesn't help: http://colinmorris.github.io/blog/ng2-poor-mans-deploy
+    - After all preparations run `ng github-pages:deploy` to deploy to Github Pages.
