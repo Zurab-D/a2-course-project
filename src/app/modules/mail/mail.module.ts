@@ -24,7 +24,9 @@ import { AuthGuardService } from '../../services/auth-guard.service';
 
 export const MailRoutes = [
   { path: '', component: MailComponent,
+    canLoad: [AuthGuardService],
     canActivate : [AuthGuardService],
+    canActivateChild : [AuthGuardService],
       resolve: { mailboxes: MailboxesResolve },
       children: [
         { path: 'new', component: MailEditComponent },

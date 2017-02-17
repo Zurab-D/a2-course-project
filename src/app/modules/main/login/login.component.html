@@ -4,25 +4,8 @@
     <h3><small>(hint: enter equal values for name & pass)</small></h3>
     <form class="login col-sm-4-" action="" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <fieldset>
-        <label>name:</label>
-        <input
-          class="nick"
-          placeholder="Your nickname"
-          formControlName="nick"
-          (input)="onInput()"
-          (keydown)="onKeydown($event, passfield)"
-          autofocus
-        >
-
-        <label>password:</label>
-        <input
-          class="pass"
-          placeholder="Your password"
-          formControlName="pass"
-          (input)="onInput()"
-          #passfield
-        >
-
+        <label>name:</label><input class="nick" placeholder="Your nickname" formControlName="nick" (input)="onInput()" autofocus>
+        <label>password:</label><input class="pass" placeholder="Your password" formControlName="pass" (input)="onInput()">
         <button type="submit" [disabled]="!loginForm.valid">Login</button>
       </fieldset>
     </form>

@@ -1,9 +1,9 @@
-import { ElementRef, Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
-import { LoginService } from '../../services/login.service';
-import { AuthGuardService } from '../../services/auth-guard.service';
+import { LoginService } from '../../../services/login.service';
+import { AuthGuardService } from '../../../services/auth-guard.service';
 
 
 @Component({
@@ -14,20 +14,17 @@ import { AuthGuardService } from '../../services/auth-guard.service';
 export class LoginComponent implements OnInit, AfterViewInit {
 
   public authorised: boolean = false;
-  public invalidAttemptCount: number = 0;
-  public fucusPassField: boolean = false;
-  public loginForm: FormGroup;
-  public el: HTMLElement = this.elementRef.nativeElement.querySelector('input.pass') as HTMLElement;
 
+  public invalidAttemptCount: number = 0;
+
+  public loginForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
               private loginService: LoginService,
               private router: Router,
-              private authGuardService: AuthGuardService,
-              private elementRef: ElementRef) {
+              private authGuardService: AuthGuardService) {
     this.authorised = this.loginService.isAuthorised;
   }
-
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -42,10 +39,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
     });
   }
 
-
   ngAfterViewInit() {
   }
-
 
   onSubmit() {
     if (this.loginForm.valid) {
@@ -68,10 +63,4 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.invalidAttemptCount = 0;
   }
 
-
-  onKeydown(e, passField) {
-    if (e.keyCode === 13) { // press enter
-      passField.focus();
-    }
-  }
 }

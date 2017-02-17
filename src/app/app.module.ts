@@ -18,14 +18,10 @@ import { LoginService } from './services/login.service';
 
 import { TypeaheadService } from './services/typeahead.service';
 
-import { MainComponent } from './components/main.component';
-import { LoginComponent } from './components/login/login.component';
-import { SettingsComponent } from './components/settings/settings.component';
-
-// import { MainModule } from './modules/main/main.module';
+import { MainModule } from './modules/main/main.module';
 import { UsersModule } from './modules/users/users.module';
 import { MailModule } from './modules/mail/mail.module';
-import { HeaderModule } from './modules/header/header.module';
+// import { HeaderModule } from './modules/header/header.module';
 
 import { Routes } from './app.routes';
 
@@ -33,15 +29,12 @@ import { Routes } from './app.routes';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    MainComponent,
-    SettingsComponent,
   ],
   imports: [
-    // MainModule,
+    MainModule,
     MailModule,
     UsersModule,
-    HeaderModule,
+    // HeaderModule,
 
     BrowserModule,
     FormsModule,

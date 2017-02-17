@@ -53,16 +53,14 @@ export class UsersListComponent implements OnInit {
 
 
   clickXBtn(user) {
-    if (window.confirm('Are you sure?')) {
-      this.usersService
-          .deleteUser(user)
-          .subscribe(data => {
-            const i = this.users.indexOf(user);
-            if (i >= 0) {
-              this.users.splice(i, 1);
-            }
-          });
-    }
+    this.usersService
+        .deleteUser(user)
+        .subscribe(data => {
+          const i = this.users.indexOf(user);
+          if (i >= 0) {
+            this.users.splice(i, 1);
+          }
+        });
   }
 
 }

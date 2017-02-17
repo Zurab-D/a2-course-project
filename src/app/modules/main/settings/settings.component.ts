@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { LettersService } from '../../services/letters.service';
-import { MailboxesService } from '../../services/mailboxes.service';
-import { UsersService } from '../../services/users.service';
+import { LettersService } from '../../../services/letters.service';
+import { MailboxesService } from '../../../services/mailboxes.service';
+import { UsersService } from '../../../services/users.service';
 
 @Component({
   selector: 'app-settings',
@@ -32,7 +32,7 @@ export class SettingsComponent implements OnInit {
         .deleteLettersBunch()
         .subscribe(
           null,
-          e => { window.alert('Error on letters deleting: ' + e.toString()); },
+          (e) => { window.alert('Error on letters deleting: ' + e.toString()); },
           () => { window.alert('Letters deleted succesfully'); }
         );
     }

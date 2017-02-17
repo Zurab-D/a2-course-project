@@ -24,7 +24,8 @@ export class MailboxesService {
         this.mailboxes = this.responseService.extractData(data);
         return this.mailboxes;
       })
-      .catch(this.responseService.handleError);
+      .catch(this.responseService.handleError)
+    ;
   }
 
 
