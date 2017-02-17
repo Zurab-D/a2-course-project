@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/first';
+import 'rxjs/add/operator/mergeMap';
 
 import { ResponseService } from './response.service';
 import { MailboxesService } from '../services/mailboxes.service';
@@ -86,20 +87,21 @@ export class LettersService {
   createLettersBunch() {
     const letters: Array<ILetter> = [];
 
-    this.mailboxesService.getAll().subscribe((mailboxes: IMailbox[]) => {
-      for (let i = 0; i < mailboxes.length; i++) {
-        this.prepareLetters4Mailbox(letters, mailboxes[i]);
-      }
-
-      const data = { letters: letters };
-      this.http.post(CONFIG.urls.root, data )
-               .map(this.responseService.extractData)
-               .catch(this.responseService.handleError)
-               .subscribe(null, null, () => window.alert('Letters generated succesfully'))
-      ;
-    });
+    this.mailboxesService
+        .getAll()
+        .flatMap(mailboxes => Observable.of((function(self) {
+            for (let i = 0; i < mailboxes.length; i++) {
+              self.prepareLetters4Mailbox(letters, mailboxes[i]);
+            }
+            const data = { letters: letters };
+            return data;
+        })(this)))
+        .flatMap(data => this.http.post(CONFIG.urls.root, data)
+            .map(this.responseService.extractData)
+            .catch(this.responseService.handleError)
+        )
+        .subscribe(null, null, () => window.alert('Letters generated succesfully'));
   }
-
 
   delete(arr: ILetter[], callback) {
     arr.forEach(letter => {

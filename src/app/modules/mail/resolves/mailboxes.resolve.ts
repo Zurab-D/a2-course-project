@@ -1,6 +1,6 @@
 ﻿import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
-import { MailboxesService } from '../services/mailboxes.service';
+import { MailboxesService } from '../../../services/mailboxes.service';
 
 @Injectable()
 export class MailboxesResolve implements Resolve<any> {

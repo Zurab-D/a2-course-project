@@ -6,7 +6,8 @@
 
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/pluck';
 
 import { LettersService } from '../../../services/letters.service';
@@ -89,32 +90,58 @@ export class MailEditComponent implements OnInit, AfterViewInit {
   createForm(letter?: ILetter) {
     if (letter) {
       this.myForm = this.formBuilder.group({
-        'to': this.letter.to,
-        'subject': this.letter.subject,
-        'body': this.letter.body
+        'to': [this.letter.to, [Validators.required, Validators.pattern('[^ @]*@[^ @]*')]],
+        'subject': [this.letter.subject, [], /*[this.askSubject] <<-- НЕ ЗАРАБОТАЛО...*/],
+        'body': [this.letter.body, []],
       });
     } else {
       this.myForm = this.formBuilder.group({
-        'to': undefined,
-        'subject': undefined,
-        'body': undefined
+        'to': [undefined, [Validators.required, Validators.pattern('[^ @]*@[^ @]*')]],
+        'subject': [undefined, [], /*[this.askSubject]*/],
+        'body': [undefined, []],
       });
     }
   }
 
 
-  onSubmit(): void {
-    this.letter.to = this.myForm.value.to;
-    this.letter.body = this.myForm.value.body;
-    this.letter.subject = this.myForm.value.subject;
+  askSubject() {
+    console.log('askSubject() -1-');
 
-    this.lettersService
-        .saveLetter(this.letter)
-        .subscribe((dat) => {
-          this.router.navigate(['/mail/sent']);
-        },
-        err => console.log('ERROR: ' + err)
-        );
+    return Observable.of(
+      (function(self) {
+        console.log('askSubject() -2-');
+        let res = true;
+        if (self && self.myForm && self.myForm.value.subject === '') {
+          res = window.confirm('Subject is empty. Continue?');
+        };
+        return { ASYNC_ERROR: res };
+      }(this))
+    );
+  }
+
+
+  onSubmit(): void {
+    if (this.myForm.valid) {
+      this.letter.to = this.myForm.value.to;
+      this.letter.body = this.myForm.value.body;
+      this.letter.subject = this.myForm.value.subject;
+
+      this.lettersService
+          .saveLetter(this.letter)
+          .subscribe(
+            null,
+            err => console.log('ERROR: ' + err),
+            () => this.router.navigate(['/mail/sent'])
+          );
+    } else {
+        // touch all controls
+        for (const ctrl in this.myForm.controls) {
+          if (this.myForm.controls[ctrl]) {
+            this.myForm.controls[ctrl].markAsTouched();
+          }
+        }
+
+    }
   }
 
 

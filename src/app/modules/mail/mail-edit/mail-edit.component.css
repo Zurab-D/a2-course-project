@@ -29,3 +29,8 @@
 .hidden {
   display: none;
 }
+
+.mail-to.ng-invalid.ng-dirty,
+.mail-to.ng-invalid.ng-touched {
+  background-color: rgba(255, 10, 80, 0.3);
+}

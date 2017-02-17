@@ -1,7 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 
-import { LettersService } from '../services/letters.service';
+import { LettersService } from '../../../services/letters.service';
 
 @Injectable()
 export class MailListResolve implements Resolve<any> {

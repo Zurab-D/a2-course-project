@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { ILetter } from '../interfaces/letter';
+import { ILetter } from '../../../interfaces/letter';
 
 
 

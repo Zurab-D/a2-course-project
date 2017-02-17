@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { ILetter } from '../interfaces/letter';
-import { MailboxesService } from '../services/mailboxes.service';
+import { ILetter } from '../../../interfaces/letter';
+import { MailboxesService } from '../../../services/mailboxes.service';
 
 
 @Pipe({

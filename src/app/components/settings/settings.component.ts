@@ -32,7 +32,7 @@ export class SettingsComponent implements OnInit {
         .deleteLettersBunch()
         .subscribe(
           null,
-          (e) => { window.alert('Error on letters deleting: ' + e.toString()); },
+          e => { window.alert('Error on letters deleting: ' + e.toString()); },
           () => { window.alert('Letters deleted succesfully'); }
         );
     }
