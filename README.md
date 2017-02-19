@@ -1,6 +1,14 @@
 # a2-course-project
+This is an Angular 2 project - a Gmail looking app.
+You can create/edit/delete letters and you can do the same with records in address book (users)
+Project includes authorisation, auto saving of new email addresses, forms validation & autocompletion of email addresses in letters.
+Project includes some unit tests.
 
-> Live Production Build [Demo](https://zurab-d.github.io/a2-course-project)
+Project design was taken here: https://github.com/khalifenizar/gmail-clone
+Backend API: http://test-api.javascript.ru/v1
+
+
+> Live Production Build [Demo projrct](https://zurab-d.github.io/a2-course-project)
 
 
 This project was generated with angular-cli version 1.0.0-beta.25.5.
