@@ -7,11 +7,9 @@ Project includes some unit tests.
 Project design was taken here: https://github.com/khalifenizar/gmail-clone
 Backend API: http://test-api.javascript.ru/v1
 
+This project was generated with angular-cli version 1.0.0-beta.25.5.
 
 > Live Production Build [Demo projrct](https://zurab-d.github.io/a2-course-project)
-
-
-This project was generated with angular-cli version 1.0.0-beta.25.5.
 
 
 ## Development server
