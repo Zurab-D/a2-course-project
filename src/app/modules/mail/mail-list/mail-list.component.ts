@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { SearchService } from '../../../services/search.service';
@@ -21,6 +21,7 @@ export class MailListComponent implements OnInit {
   private letters: ILetter[] = [];
   mailboxValue = '';
   searchValue = '';
+  public allBtnService$;
 
 
   constructor(private lettersService: LettersService,
@@ -53,8 +54,8 @@ export class MailListComponent implements OnInit {
     });
 
     // ------------------------------------------------------------
-    this.deleteAllButtonService.subscribe(() => {
-      const deleting: ILetter[] = this.letters.filter(letter => letter._checked);
+    this.allBtnService$ = this.deleteAllButtonService.subscribe(() => {
+      const deleting: ILetter[] = this.letters.filter(letter => letter._checked).map(item => item);
 
       this.lettersService
         .delete(deleting, letterDeleted => {
@@ -83,6 +84,11 @@ export class MailListComponent implements OnInit {
 
     this.refreshIfFlag();
 
+  }
+
+
+  ngOnDestroy() {
+    this.allBtnService$.unsubscribe();
   }
 
 

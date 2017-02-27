@@ -96,7 +96,8 @@ export class LettersService {
             const data = { letters: letters };
             return data;
         })(this)))
-        .flatMap(data => this.http.post(CONFIG.urls.root, data)
+        .flatMap(data => this.http
+            .post(CONFIG.urls.root, data)
             .map(this.responseService.extractData)
             .catch(this.responseService.handleError)
         )
@@ -105,14 +106,17 @@ export class LettersService {
 
   delete(arr: ILetter[], callback) {
     arr.forEach(letter => {
+      if (!letter._id) return;
+
       const headers = new Headers({ 'Content-Type': 'application/json' });
       const options = new RequestOptions({ headers });
 
       const url = `${CONFIG.urls.letters}/${letter._id}`;
-      return this.http.delete(url, options)
-                      .map(this.responseService.extractData)
-                      .catch(err => this.responseService.handleError(err))
-                      .subscribe(callback(letter));
+      return this.http
+                 .delete(url, options)
+                 .map(this.responseService.extractData)
+                 .catch(err => this.responseService.handleError(err))
+                 .subscribe(callback(letter));
     });
   }
 
@@ -127,7 +131,7 @@ export class LettersService {
   }
 
 
-  saveLetter(letter: ILetter) {
+  createLetter(letter: ILetter) {
     const letters: Array<ILetter> = [];
 
     letter.mailbox = this.mailboxesService.getMailboxId('sent');
@@ -136,11 +140,25 @@ export class LettersService {
     const data = { letters: letters };
 
     const res: Observable<ILetter> = this.http
-               .post(CONFIG.urls.root, data)
-               .map(this.responseService.extractData)
-               .catch(this.responseService.handleError);
+                   .post(CONFIG.urls.root, data)
+                   .map(this.responseService.extractData)
+                   .catch(this.responseService.handleError);
 
     this.usersService.saveEmailIfNotExists(letter.to);
+
+    return res;
+  }
+
+
+  patchLetter(letter: ILetter) {
+    const res: Observable<ILetter> = this.http
+                   .patch(`${CONFIG.urls.letters}/${letter._id}`, letter)
+                   .map(this.responseService.extractData)
+                   .catch(this.responseService.handleError);
+
+    this.usersService.saveEmailIfNotExists(letter.to);
+
+    //this.usersService.updateEmail(letter.to);
 
     return res;
   }

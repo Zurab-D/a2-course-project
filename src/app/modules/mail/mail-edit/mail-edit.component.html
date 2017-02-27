@@ -1,8 +1,9 @@
 <form class="inbox col-sm-10" action="" [formGroup]="myForm" (ngSubmit)="onSubmit()">
   <div class="buttons">
     <span class="label"></span>
-    <button class="btn btn-control btn-send" type="submit" [ngClass]="{hidden: !!letter._id}">Save</button>
-    <button class="btn btn-control btn-back" type="button" (click)="clickCancel()" >Cancel</button>
+    <!-- <button class="btn btn-control btn-send" type="submit" [ngClass]="{hidden: !!letter._id}">Save</button> -->
+    <button class="btn btn-control btn-send" type="submit">Save</button>
+    <button class="btn btn-control btn-back" type="button" (click)="navigateToParrent()" >Cancel</button>
   </div>
 
   <div class="to">

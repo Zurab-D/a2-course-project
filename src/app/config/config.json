@@ -1,0 +1,11 @@
+﻿{
+    "useUrlBase": true,
+    "urlBase": "https://test-api.javascript.ru/v1/zurab",
+    "urls": {
+        "root": "/",
+        "users": "/users",
+        "letters": "/letters",
+        "mailboxes": "/mailboxes"
+    },
+    "userMailField": "email"
+}

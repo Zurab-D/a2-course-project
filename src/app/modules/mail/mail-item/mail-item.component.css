@@ -19,6 +19,7 @@
   width: calc(100% - 85px);
 }
 
-.message {
-  padding: 10px 0;
+.message,
+.date {
+  padding: 10px 10px 10px 0;
 }

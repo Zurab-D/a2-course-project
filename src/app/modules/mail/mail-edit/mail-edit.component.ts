@@ -4,7 +4,7 @@
  */
 
 
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
@@ -24,6 +24,7 @@ export class MailEditComponent implements OnInit, AfterViewInit {
   private id: string;
   public letter: ILetter = new Letter();
   public tmpLetter: ILetter = undefined;
+  public allBtnService$;
 
   public myForm: FormGroup;
 
@@ -75,24 +76,30 @@ export class MailEditComponent implements OnInit, AfterViewInit {
      */
 
     // ------------------------------------------------------------
-    const s$ = this.deleteAllButtonService.subscribe(() => {
+    this.allBtnService$ = this.deleteAllButtonService.subscribe(() => {
       const deleting: ILetter[] = [this.letter];
 
       this.lettersService
         .delete(deleting, res => {
           this.lettersService.flagRefresh = true;
-          s$.unsubscribe();
-          this.clickCancel();
+          this.allBtnService$.unsubscribe();
+          this.navigateToParrent();
         });
     });
   }
 
+
+  ngOnDestroy() {
+    this.allBtnService$.unsubscribe();
+  }
+
+
   createForm(letter?: ILetter) {
     if (letter) {
       this.myForm = this.formBuilder.group({
-        'to': [this.letter.to, [Validators.required, Validators.pattern('[^ @]*@[^ @]*')]],
-        'subject': [this.letter.subject, [], /*[this.askSubject] <<-- НЕ ЗАРАБОТАЛО...*/],
-        'body': [this.letter.body, []],
+        'to': [letter.to, [Validators.required, Validators.pattern('[^ @]*@[^ @]*')]],
+        'subject': [letter.subject, [], /*[this.askSubject] <<-- НЕ ЗАРАБОТАЛО...*/],
+        'body': [letter.body, []],
       });
     } else {
       this.myForm = this.formBuilder.group({
@@ -126,13 +133,25 @@ export class MailEditComponent implements OnInit, AfterViewInit {
       this.letter.body = this.myForm.value.body;
       this.letter.subject = this.myForm.value.subject;
 
-      this.lettersService
-          .saveLetter(this.letter)
-          .subscribe(
-            null,
-            err => console.log('ERROR: ' + err),
-            () => this.router.navigate(['/mail/sent'])
-          );
+      if (this.letter._id) {
+        // patch existing letter
+        this.lettersService
+            .patchLetter(this.letter)
+            .subscribe(
+              null,
+              err => console.log('ERROR: ' + err),
+              () => this.navigateToParrent()
+            );
+      } else {
+        // create a new letter
+        this.lettersService
+            .createLetter(this.letter)
+            .subscribe(
+              null,
+              err => console.log('ERROR: ' + err),
+              () => this.router.navigate(['/mail/sent'])
+            );
+      }
     } else {
         // touch all controls
         for (const ctrl in this.myForm.controls) {
@@ -145,7 +164,7 @@ export class MailEditComponent implements OnInit, AfterViewInit {
   }
 
 
-  clickCancel() {
+  navigateToParrent() {
     const arr = this.router.url.split('/').filter(item => !!item);
     const destUrl = arr.slice(0, arr.length - 1).join('/');
 

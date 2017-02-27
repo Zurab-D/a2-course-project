@@ -105,6 +105,11 @@ export class UserEditComponent implements OnInit {
             },
             err => {
               this.errorMsg = err;
+            },
+            () => {
+              return this.usersService
+                         .getById(this.user._id)
+                         .subscribe(user => this.user = user);
             }
           );
     } else {
