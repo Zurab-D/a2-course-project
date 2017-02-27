@@ -1,6 +1,7 @@
 # a2-course-project
 Angular 2 project - an app looking like Gmail.
 
+
 ## Description
 You can create/edit/delete letters and you can do the same with records in address book (users)
 Project includes authorisation, auto saving of new email addresses, forms validation & autocompletion of email addresses in letters.
