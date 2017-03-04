@@ -1,0 +1,6 @@
+﻿{
+    "urlSignin": "/signin",
+    "urlSignup": "/signup",
+    "urlLogout": "/logout",
+    "urlAuthorised": "/authorized",
+}
