@@ -14,14 +14,11 @@ export class ProfileComponent implements OnInit {
   constructor(private loginService: LoginService, private router: Router) { }
 
   clickLogout() {
-    this.loginService.logout();
-    this.router.navigate(['/signin']);
+    this.loginService.logout().subscribe(this.router.navigate(['/']));
   }
 
   ngOnInit() {
     this.receivedUserObj = this.loginService.user;
-    // console.log(this.receivedUserObj);
-    // console.log(`this.receivedUserObj.displayName = "${this.receivedUserObj.displayName}"`);
   }
 
 }
