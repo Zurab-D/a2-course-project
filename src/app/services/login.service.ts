@@ -84,14 +84,14 @@ export class LoginService {
 
   // -- Logout --------------------------------------------------
   logout() {
-    //const s$ = this.http
+    // const s$ = this.http
     return this.http
-                   .get(this.urlLogout)
-                   .map(this.responseService.extractData)
-                   .catch(this.responseService.handleError);
+               .get(this.urlLogout)
+               .map(this.responseService.extractData)
+               .catch(this.responseService.handleError);
 
-    //s$.subscribe(data => {console.log('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-');this.router.navigate(['/']);})
-      //.unsubscribe();
+    // s$.subscribe(data => {console.log('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-');this.router.navigate(['/']);})
+    //   .unsubscribe();
   }
 
 

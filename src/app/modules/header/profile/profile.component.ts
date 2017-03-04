@@ -14,7 +14,9 @@ export class ProfileComponent implements OnInit {
   constructor(private loginService: LoginService, private router: Router) { }
 
   clickLogout() {
-    this.loginService.logout().subscribe(this.router.navigate(['/']));
+    this.loginService
+        .logout()
+        .subscribe(res => this.router.navigate(['/signin']));
   }
 
   ngOnInit() {
