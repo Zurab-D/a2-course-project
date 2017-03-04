@@ -7,7 +7,6 @@ import 'rxjs/add/observable/of';
 
 import { ResponseService } from './response.service';
 import { CONFIG } from '../config';
-// import { createHashSlow, createSalt } from '../libs/pbkdf2';
 
 
 @Injectable()
@@ -16,7 +15,6 @@ export class LoginService {
   private urlSignup = CONFIG.urlsAuth.urlSignup; // '/signup';
   private urlLogout = CONFIG.urlsAuth.urlLogout; // '/logout';
   private urlAuthorised = CONFIG.urlsAuth.urlAuthorised; // '/authorized';
-  // private urlSalt = '/salt';
 
   public user = {};
 
@@ -57,41 +55,15 @@ export class LoginService {
                .map(this.responseService.extractData)
                .map(res => this.user = res)
                .catch(this.responseService.handleError);
-
-    /*return this.http
-               .get(`${this.urlSalt}/${nick}`)
-               .flatMap((saltRes: Response) => {
-                 const saltObj = JSON.parse(saltRes.text().toLowerCase());
-                 const salt = saltObj['salt'];
-                 console.log('-->> salt =', salt);
-
-                 // const hash = createHashSlow(pass, salt);
-                 // return Observable.of( hash );
-                 return createHashSlow(pass, salt);
-                })
-               .flatMap(hash => {
-                 return this.http
-                            .post(this.urlSignin,
-                                { username: nick, hash: hash },
-                                { headers: headers, withCredentials: true } as RequestOptionsArgs
-                            )
-                            .map((res: Response) => res)
-                            .catch(this.responseService.handleError);
-               });
-    */
   }
 
 
   // -- Logout --------------------------------------------------
   logout() {
-    // const s$ = this.http
     return this.http
                .get(this.urlLogout)
                .map(this.responseService.extractData)
                .catch(this.responseService.handleError);
-
-    // s$.subscribe(data => {console.log('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-');this.router.navigate(['/']);})
-    //   .unsubscribe();
   }
 
 

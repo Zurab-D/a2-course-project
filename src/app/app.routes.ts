@@ -28,11 +28,4 @@ export const Routes = [
       { path: 'settings', component: SettingsComponent, },
     ]
   },
-
-  /*{ path: '', children: [ ...MainRoutes ] },
-
-  { path: 'mail', children: [ ...MailRoutes ] },
-
-  { path: 'users', children: [ ...UserRoutes ] },*/
-
 ];

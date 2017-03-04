@@ -1,7 +1,6 @@
 .content {
   position: absolute;
   padding: 20px;
-  /* width: 30%; */
   width: 390px;
   height: 300px;
   top: 50%;
@@ -28,9 +27,7 @@ form input {
 fieldset {
   padding-left: 0;
   position: absolute;
-  /*top: 50%;*/
   left: 50%;
-  /*transform: translate(-50%, -35%);*/
   transform: translateX(-50%);
 }
 

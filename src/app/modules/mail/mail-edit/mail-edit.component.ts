@@ -1,6 +1,5 @@
-/**
- * This myForm is reactive
- * User editing myForm (user-edit) is template-driven
+/** This myForm is reactive
+ *  User editing myForm (user-edit) is template-driven
  */
 
 
@@ -71,8 +70,8 @@ export class MailEditComponent implements OnInit, AfterViewInit {
       this.letter = this.tmpLetter;
       this.createForm(this.letter);
     }
-    /**
-     * ЗДЕСЬ мне не нравится что вызов this.createForm() нужно прописывать дважды, но как сделать иначе?
+    /** ЗДЕСЬ мне не нравится что вызов this.createForm() нужно прописывать дважды,
+     *  но как сделать иначе?
      */
 
     // ------------------------------------------------------------

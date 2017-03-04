@@ -20,9 +20,6 @@ export class AuthGuardService implements CanActivate, CanLoad {
                   this.initialUrl = state.url;
 
                   if (res['authorised']) {
-                    /*this.loginService.user = res;
-                    console.log('this.loginService.user = ');
-                    console.log(this.loginService.user);*/
                     return true;
                   } else {
                     this.router.navigate(['/signin']);
@@ -44,9 +41,6 @@ export class AuthGuardService implements CanActivate, CanLoad {
                   this.initialUrl = `/${route.path}`;
 
                   if (res['authorised']) {
-                    /*this.loginService.user = res;
-                    console.log('this.loginService.user = ');
-                    console.log(this.loginService.user);*/
                     return true;
                   } else {
                     this.router.navigate(['/signin']);

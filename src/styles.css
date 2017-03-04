@@ -24,11 +24,9 @@
 }
 
 .typeahead li:not(:first-child) {
-  /*margin-top: 3px;*/
   padding-top: 4px;
 }
 
 .typeahead li:not(:last-child) {
-  /*border-bottom: solid 1px #aaa;*/
   padding-bottom: 4px;
 }
