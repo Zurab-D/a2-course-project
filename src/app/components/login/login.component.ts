@@ -1,4 +1,4 @@
-import { /*ElementRef,*/ Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
@@ -13,18 +13,16 @@ import { AuthGuardService } from '../../services/auth-guard.service';
 })
 export class LoginComponent implements OnInit, AfterViewInit {
 
-  public authorised: boolean = false;
-  public invalidAttemptCount: number = 0;
-  public fucusPassField: boolean = false;
+  public authorised = false;
+  public invalidAttemptCount = 0;
+  public fucusPassField = false;
   public loginForm: FormGroup;
-  // public el: HTMLElement = this.elementRef.nativeElement.querySelector('input.pass') as HTMLElement;
 
 
   constructor(private formBuilder: FormBuilder,
               private loginService: LoginService,
               private router: Router,
-              private authGuardService: AuthGuardService/*,
-              private elementRef: ElementRef*/) {
+              private authGuardService: AuthGuardService) {
     this.authorised = false;
   }
 
@@ -34,9 +32,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
         .isAuthorised()
         .subscribe( res => {
             this.authorised = res['authorised'];
-            /*this.loginService.user = res;
-            console.log('this.loginService.user = ');
-            console.log(this.loginService.user);*/
             if (this.authorised) {
               this.router.navigate(['']);
             }
@@ -70,7 +65,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
                   res => {
                     this.authorised = res['authorised'];
                     if (!this.authorised) { this.invalidAttemptCount++; }
-                    // this.loginService.user = res;
                     if (this.authGuardService.initialUrl && this.authGuardService.initialUrl.replace('/', '')) {
                       this.router.navigate([this.authGuardService.initialUrl]);
                     } else {
