@@ -1,39 +1,106 @@
 import { Injectable } from '@angular/core';
+import { Http, Headers, RequestOptionsArgs } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 
 import 'rxjs/add/observable/of';
 
+import { ResponseService } from './response.service';
+import { CONFIG } from '../config';
+// import { createHashSlow, createSalt } from '../libs/pbkdf2';
+
+
 @Injectable()
 export class LoginService {
+  private urlSignin = CONFIG.urlsAuth.urlSignin; // '/signin';
+  private urlSignup = CONFIG.urlsAuth.urlSignup; // '/signup';
+  private urlLogout = CONFIG.urlsAuth.urlLogout; // '/logout';
+  private urlAuthorised = CONFIG.urlsAuth.urlAuthorised; // '/authorized';
+  // private urlSalt = '/salt';
 
-  private auth: boolean = false;
+  public user = {};
 
-  constructor(private router: Router) { }
 
-  login(nick: string, pass: string): Observable<boolean> {
-    // here ask server if user is ok
-    // do not send pass, use hash function (MD5, SHA1, or SHA2) instead
-
-    // this code is just a dummy
-    this.authorised = nick === pass;
-
-    return Observable.of(this.isAuthorised);
+  constructor(private router: Router,
+              private http: Http,
+              private responseService: ResponseService) {
   }
 
 
+  // -- Sign up --------------------------------------------------
+  signup(formValue): Observable<boolean> {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    const body = {
+      displayName: formValue.name,
+      username   : formValue.nick,
+      email      : formValue.email,
+      password   : formValue.pass
+    };
+
+    return this.http
+               .post(this.urlSignup, body, <RequestOptionsArgs> {headers: headers, withCredentials: true})
+               .map(this.responseService.extractData)
+               .catch(this.responseService.handleError);
+  }
+
+
+  // -- Sign in --------------------------------------------------
+  signin(formValue): Observable<boolean> {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    const body = { username: formValue.nick, password: formValue.pass };
+    return this.http
+               .post(this.urlSignin, body, <RequestOptionsArgs> {headers: headers, withCredentials: true})
+               .map(this.responseService.extractData)
+               .map(res => this.user = res)
+               .catch(this.responseService.handleError);
+
+    /*return this.http
+               .get(`${this.urlSalt}/${nick}`)
+               .flatMap((saltRes: Response) => {
+                 const saltObj = JSON.parse(saltRes.text().toLowerCase());
+                 const salt = saltObj['salt'];
+                 console.log('-->> salt =', salt);
+
+                 // const hash = createHashSlow(pass, salt);
+                 // return Observable.of( hash );
+                 return createHashSlow(pass, salt);
+                })
+               .flatMap(hash => {
+                 return this.http
+                            .post(this.urlSignin,
+                                { username: nick, hash: hash },
+                                { headers: headers, withCredentials: true } as RequestOptionsArgs
+                            )
+                            .map((res: Response) => res)
+                            .catch(this.responseService.handleError);
+               });
+    */
+  }
+
+
+  // -- Logout --------------------------------------------------
   logout() {
-    this.authorised = false;
-    this.router.navigate(['/login']);
+    const s$ = this.http
+                   .get(this.urlLogout)
+                   .map(this.responseService.extractData)
+                   .catch(this.responseService.handleError);
+
+    s$.subscribe(data => this.router.navigate(['/signin']))
+      .unsubscribe();
   }
 
 
-  get isAuthorised(): boolean {
-    return this.auth;
+  // -- Is Authorized? --------------------------------------------------
+  isAuthorised() {
+    return this.http
+               .get(this.urlAuthorised)
+               .map(this.responseService.extractData)
+               .map(res => this.user = res)
+               .catch(this.responseService.handleError);
   }
 
-
-  set authorised(value: boolean) {
-    this.auth = value;
-  }
 }

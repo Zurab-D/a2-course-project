@@ -16,10 +16,13 @@ import { DeleteAllButtonService } from './services/delete-all-button.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { LoginService } from './services/login.service';
 
+
 import { TypeaheadService } from './services/typeahead.service';
+import { EqualValidator } from './components/signup/equal-validator.directive';
 
 import { MainComponent } from './components/main.component';
 import { LoginComponent } from './components/login/login.component';
+import { SignupComponent } from './components/signup/signup.component';
 import { SettingsComponent } from './components/settings/settings.component';
 
 // import { MainModule } from './modules/main/main.module';
@@ -34,8 +37,10 @@ import { Routes } from './app.routes';
   declarations: [
     AppComponent,
     LoginComponent,
+    SignupComponent,
     MainComponent,
     SettingsComponent,
+    EqualValidator,
   ],
   imports: [
     // MainModule,

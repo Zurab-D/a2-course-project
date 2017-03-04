@@ -1,6 +1,6 @@
 <div class="profile col-sm-4">
   <ul class="profile-icons list-inline pull-right">
-    <li>Nizar</li>
+    <li>{{receivedUserObj.displayName}}</li>
     <li>
       <span class="glyphicon glyphicon-th"></span>
     </li>
@@ -8,7 +8,17 @@
       <span class="glyphicon glyphicon-bell"></span>
     </li>
     <li>
-      <img src="./assets/img/profile.jpg" class="img-circle">
+      <div class="btn-group">
+        <button class="btn-img" data-toggle="dropdown" type="button">
+          <img class="img-circle" src="./assets/img/profile.jpg">
+        </button>
+        <ul class="dropdown-menu">
+          <li><a target="_blank" href="https://github.com/Zurab-D">Github profile</a></li>
+          <li><a target="_blank" href="http://learn.javascript.ru/profile/zurab">Javascrit.ru profile</a></li>
+          <li class="divider" role="separator"></li>
+          <li><a href="#" (click)="clickLogout()">Log out</a></li>
+        </ul>
+      </div>
     </li>
   </ul>
 </div>

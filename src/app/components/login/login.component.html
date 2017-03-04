@@ -1,31 +1,35 @@
+<!-- <div class="content" *ngIf="!authorised"> -->
 <div class="content" *ngIf="!authorised">
   <div class="form-cover">
     <h3>Sign in:</h3>
-    <h3><small>(hint: enter equal values for name & pass)</small></h3>
-    <form class="login col-sm-4-" action="" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <!--<h3><small>(hint: enter equal values for name & pass)</small></h3>-->
+    <form class="login col-sm-4-" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <fieldset>
-        <label>name:</label>
+        <label>Login:</label>
         <input
           class="nick"
-          placeholder="Your nickname"
+          placeholder="Your login"
           formControlName="nick"
           (input)="onInput()"
           (keydown)="onKeydown($event, passfield)"
           autofocus
         >
 
-        <label>password:</label>
+        <label>Password:</label>
         <input
           class="pass"
           placeholder="Your password"
+          type="password"
           formControlName="pass"
           (input)="onInput()"
           #passfield
         >
 
         <button type="submit" [disabled]="!loginForm.valid">Login</button>
+
+        <a routerLink="/signup">or sign up</a>
       </fieldset>
     </form>
   </div>
-  <div class="err  bg-danger" *ngIf="!!invalidAttemptCount">The pair of Name and Passwword is invalid!</div>
+  <div class="err bg-danger" *ngIf="!!invalidAttemptCount">The pair of Name and Passwword is invalid!</div>
 </div>

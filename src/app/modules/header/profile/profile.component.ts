@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginService } from '../../../services/login.service';
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  receivedUserObj = {};
+
+  constructor(private loginService: LoginService, private router: Router) { }
+
+  clickLogout() {
+    this.loginService.logout();
+    this.router.navigate(['/signin']);
+  }
 
   ngOnInit() {
+    this.receivedUserObj = this.loginService.user;
+    // console.log(this.receivedUserObj);
+    // console.log(`this.receivedUserObj.displayName = "${this.receivedUserObj.displayName}"`);
   }
 
 }

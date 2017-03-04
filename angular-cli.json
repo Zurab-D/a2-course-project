@@ -6,7 +6,7 @@
   "apps": [
     {
       "root": "src",
-      "outDir": "dist",
+      "outDir": "C:/git/mailbox/public",
       "assets": [
         "assets",
         "favicon.ico"

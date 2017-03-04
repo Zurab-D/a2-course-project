@@ -3,7 +3,6 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 
 import { CheckboxLetterService } from '../services/checkbox-letter.service';
 import { DeleteAllButtonService } from '../services/delete-all-button.service';
-import { LoginService } from '../services/login.service';
 
 
 @Component({
@@ -19,8 +18,7 @@ export class MainComponent implements OnInit {
   constructor(private router: Router,
               private route: ActivatedRoute,
               private checkboxLetterService: CheckboxLetterService,
-              private deleteAllButtonService: DeleteAllButtonService,
-              private loginService: LoginService) {
+              private deleteAllButtonService: DeleteAllButtonService) {
   }
 
 
@@ -45,11 +43,6 @@ export class MainComponent implements OnInit {
   checkAll(evt) {
     this.checkboxLetterService.click(evt.target.checked);
     this.allChecked = evt.target.checked;
-  }
-
-
-  clickLogout() {
-    this.loginService.logout();
   }
 
 }

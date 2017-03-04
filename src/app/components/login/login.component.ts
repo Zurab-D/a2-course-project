@@ -1,4 +1,4 @@
-import { ElementRef, Component, OnInit, AfterViewInit } from '@angular/core';
+import { /*ElementRef,*/ Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
@@ -17,19 +17,31 @@ export class LoginComponent implements OnInit, AfterViewInit {
   public invalidAttemptCount: number = 0;
   public fucusPassField: boolean = false;
   public loginForm: FormGroup;
-  public el: HTMLElement = this.elementRef.nativeElement.querySelector('input.pass') as HTMLElement;
+  // public el: HTMLElement = this.elementRef.nativeElement.querySelector('input.pass') as HTMLElement;
 
 
   constructor(private formBuilder: FormBuilder,
               private loginService: LoginService,
               private router: Router,
-              private authGuardService: AuthGuardService,
-              private elementRef: ElementRef) {
-    this.authorised = this.loginService.isAuthorised;
+              private authGuardService: AuthGuardService/*,
+              private elementRef: ElementRef*/) {
+    this.authorised = false;
   }
 
 
   ngOnInit() {
+    this.loginService
+        .isAuthorised()
+        .subscribe( res => {
+            this.authorised = res['authorised'];
+            /*this.loginService.user = res;
+            console.log('this.loginService.user = ');
+            console.log(this.loginService.user);*/
+            if (this.authorised) {
+              this.router.navigate(['']);
+            }
+        } );
+
     this.loginForm = this.formBuilder.group({
       nick: ['', [
         Validators.required
@@ -50,15 +62,23 @@ export class LoginComponent implements OnInit, AfterViewInit {
   onSubmit() {
     if (this.loginForm.valid) {
       this.loginService
-          .login(this.loginForm.value.nick, this.loginForm.value.pass)
-          .subscribe(res => {
-            this.invalidAttemptCount ++;
-            this.authorised = this.loginService.isAuthorised;
-            if (this.authGuardService.initialUrl && this.authGuardService.initialUrl.replace('/', '')) {
-              this.router.navigate([this.authGuardService.initialUrl]);
-            } else {
-              this.router.navigate(['/mail/Inbox']);
-            }
+          .signin(this.loginForm.value)
+          .subscribe(data => {
+            this.loginService
+                .isAuthorised()
+                .subscribe(
+                  res => {
+                    this.authorised = res['authorised'];
+                    if (!this.authorised) { this.invalidAttemptCount++; }
+                    // this.loginService.user = res;
+                    if (this.authGuardService.initialUrl && this.authGuardService.initialUrl.replace('/', '')) {
+                      this.router.navigate([this.authGuardService.initialUrl]);
+                    } else {
+                      this.router.navigate(['/mail/Inbox']);
+                    }
+                  },
+                  err => this.invalidAttemptCount ++
+                );
           });
     }
   }
@@ -69,9 +89,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
 
-  onKeydown(e, passField) {
+  onKeydown(e, nextField) {
     if (e.keyCode === 13) { // press enter
-      passField.focus();
+      nextField.focus();
     }
   }
 }

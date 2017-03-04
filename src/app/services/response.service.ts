@@ -10,6 +10,7 @@ export class ResponseService implements IResponse {
 
   constructor() { }
 
+
   public extractData(res: Response): any {
     try {
       if (res !== undefined && typeof res.json !== undefined && res.json() !== undefined) {
@@ -19,6 +20,7 @@ export class ResponseService implements IResponse {
       return res.toString();
     }
   }
+
 
   public handleError (error: Response | any): any {
     let result: string;

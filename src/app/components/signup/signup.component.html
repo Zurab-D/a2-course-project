@@ -1,0 +1,54 @@
+<div class="content" *ngIf="!authorised">
+  <div class="form-cover">
+    <h3>Sign Up:</h3>
+    <form class="signup col-sm-4-" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <fieldset>
+        <div class="form-group" [ngClass]="{'has-error':!signupForm.controls['name'].valid}">
+          <label>Your full name:</label>
+          <input class="name" placeholder="Your full name"  formControlName="name"  (keydown)="onKeydown($event, loginField)" autofocus>
+          <div *ngIf="signupForm.controls['name'].hasError('required') && signupForm.controls['name'].touched" class="alert alert-danger">You must include a full name.</div>
+          <div *ngIf="signupForm.controls['name'].hasError('minlength') && signupForm.controls['name'].touched" class="alert alert-danger">Your full name must be at least 3 characters long.</div>
+          <div *ngIf="signupForm.controls['name'].hasError('maxlength') && signupForm.controls['name'].touched" class="alert alert-danger">Your full name cannot exceed 15 characters.</div>
+        </div>
+
+        <div class="form-group" [ngClass]="{'has-error':!signupForm.controls['nick'].valid}">
+          <label>Login:</label>
+          <input class="nick" placeholder="Your nickname"   formControlName="nick"  (keydown)="onKeydown($event, emailField)" #loginField>
+          <div *ngIf="signupForm.controls['nick'].hasError('required') && signupForm.controls['nick'].touched" class="alert alert-danger">You must include a nickname.</div>
+          <div *ngIf="signupForm.controls['nick'].hasError('minlength') && signupForm.controls['nick'].touched" class="alert alert-danger">Your nickname must be at least 3 characters long.</div>
+          <div *ngIf="signupForm.controls['nick'].hasError('maxlength') && signupForm.controls['nick'].touched" class="alert alert-danger">Your nickname cannot exceed 15 characters.</div>
+        </div>
+
+        <div class="form-group" [ngClass]="{'has-error':!signupForm.controls['email'].valid}">
+          <label>Email:</label>
+          <input class="email" placeholder="Your email"     formControlName="email" (keydown)="onKeydown($event, pass)" #emailField>
+          <div *ngIf="signupForm.controls['email'].hasError('required') && signupForm.controls['email'].touched" class="alert alert-danger">You must include an email.</div>
+          <div *ngIf="signupForm.controls['email'].hasError('pattern') && signupForm.controls['email'].touched" class="alert alert-danger">Your email is not valid.</div>
+        </div>
+
+        <div class="form-group" [ngClass]="{'has-error':!signupForm.controls['pass'].valid}">
+          <label>Password:</label>
+          <input class="pass" placeholder="Your password"   formControlName="pass"  validateEqual="pass2" reverse="true" (keydown)="onKeydown($event, pass2)" name="pass" #pass type="password">
+
+          <small [hidden]="signupForm.controls['pass'].valid || (signupForm.controls['pass'].pristine && !signupForm.submitted)" class="text-danger">
+            Password is required.
+          </small>
+        </div>
+
+        <div class="form-group" [ngClass]="{'has-error':!signupForm.controls['pass2'].valid}">
+          <label>Repeat password:</label>
+          <input class="pass" placeholder="Repeat password" formControlName="pass2" validateEqual="pass" reverse="false" name="pass2" #pass2 type="password">
+
+          <small [hidden]="signupForm.controls['pass2'].valid || (signupForm.controls['pass2'].pristine && !signupForm.submitted)" class="text-danger">
+            Password mismatch.
+          </small>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="!signupForm.valid">Signup</button>
+
+        <a routerLink="/signin">or go login</a>
+      </fieldset>
+    </form>
+  </div>
+  <div class="err bg-danger" *ngIf="!!invalidAttemptCount">The pair of Name and Passwword is invalid!</div>
+</div>
