@@ -6,8 +6,9 @@ Project includes some unit tests.
 
 Project design was taken here: https://github.com/khalifenizar/gmail-clone
 Backend API: http://test-api.javascript.ru/v1
+And here is backend project src : https://github.com/Zurab-D/mailbox
 
-This project was generated with angular-cli version 1.0.0-beta.25.5.
+This project was generated with angular-cli version 1.0.0-rc.1
 
 > Live Production Build [Demo projrct](https://zurab-d.github.io/a2-course-project)
 
@@ -58,3 +59,5 @@ Before running the tests make sure you are serving the app via `ng serve`.
     - First of all read this article: http://developer.telerik.com/featured/quick-angular-2-hosting-angular-cli-github-pages
     - and this, if prev one doesn't help: http://colinmorris.github.io/blog/ng2-poor-mans-deploy
     - After all preparations run `ng github-pages:deploy` to deploy to Github Pages.
+
+    --- UPD: command `ng github-pages:deploy` doesn't work anymore with last version of angular-cli (1.0.0-rc.1)
