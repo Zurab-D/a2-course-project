@@ -1,5 +1,5 @@
 {
-    "useUrlBase": false,
+    "useUrlBase": true,
     "urlBase": "https://test-api.javascript.ru/v1/zurab",
     "urlBase_L": "http://localhost:3000",
     "urls": {
@@ -9,10 +9,10 @@
         "mailboxes": "/mailboxes"
     },
     "urlsAuth": {
-        "urlSignin": "/signin",
-        "urlSignup": "/signup",
-        "urlLogout": "/logout",
-        "urlAuthorised": "/authorized"
+        "urlSignin": "./assets/backend/signin.json",
+        "urlSignup": "./assets/backend/signup.json",
+        "urlLogout": "./assets/backend/logout.json",
+        "urlAuthorised": "./assets/backend/authorized.json"
     },
     "userMailField": "email",
     "modeProduction": false,
