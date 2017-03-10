@@ -65,6 +65,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
                   res => {
                     this.authorised = res['authorised'];
                     if (!this.authorised) { this.invalidAttemptCount++; }
+
                     if (this.authGuardService.initialUrl && this.authGuardService.initialUrl.replace('/', '')) {
                       this.router.navigate([this.authGuardService.initialUrl]);
                     } else {

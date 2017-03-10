@@ -1,5 +1,5 @@
 /** This form is template-driven
- * Letter editing form (mail-edit) is reactive
+ *  Letter editing form (mail-edit) is reactive
  */
 
 

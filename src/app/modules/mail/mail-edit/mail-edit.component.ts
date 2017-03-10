@@ -148,7 +148,7 @@ export class MailEditComponent implements OnInit, AfterViewInit {
             .subscribe(
               null,
               err => console.log('ERROR: ' + err),
-              () => this.router.navigate(['/mail/sent'])
+              () => this.router.navigate(['/mail/Sent'])
             );
       }
     } else {
