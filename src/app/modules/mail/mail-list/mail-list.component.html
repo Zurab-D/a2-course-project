@@ -1,8 +1,8 @@
 <section class="inbox col-sm-10">
   <ul class="list-unstyled">
-    <li *ngFor="let letter of letters | filterSearch: searchValue | filterMailbox: mailboxValue" class="email-item row">
+    <li *ngFor="let letter of lettersService.letters | filterSearch: searchValue | filterMailbox: mailboxValue" class="email-item row">
       <app-mail-item [letter]="letter" (clicked)="mailItemClicked()"></app-mail-item>
     </li>
   </ul>
 </section>
- <!-- <pre>{{letters | json}}</pre> -->
+  <!--<pre>{{lettersService.letters | json}}</pre>-->

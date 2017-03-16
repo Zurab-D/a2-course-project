@@ -5,8 +5,6 @@ import { SettingsComponent } from './components/settings/settings.component';
 
 import { AuthGuardService } from './services/auth-guard.service';
 
-// import { MainRoutes } from './modules/main/main.module';
-
 import { MailRoutes } from './modules/mail/mail.module';
 import { UserRoutes } from './modules/users/users.module';
 

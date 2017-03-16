@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { SearchService } from '../../../services/search.service';
@@ -17,8 +17,9 @@ import 'rxjs/add/operator/toPromise';
   templateUrl: './mail-list.component.html',
   styleUrls: ['./mail-list.component.css']
 })
-export class MailListComponent implements OnInit {
-  private letters: ILetter[] = [];
+export class MailListComponent implements OnInit, OnDestroy {
+
+  @Input() isSearch: boolean = false;
   mailboxValue = '';
   searchValue = '';
   public allBtnService$;
@@ -35,37 +36,39 @@ export class MailListComponent implements OnInit {
 
   ngOnInit() {
 
-    this.letters = this.route.snapshot.data['mailList'];
-
     // get mailbox name from the router params
     this.route
         .params
         .subscribe(params => {
           this.mailboxValue = params['mailbox'];
-          this.searchValue = '';
+          // this.searchValue = '';
           this.uncheckAll();
           this.mailItemClicked();
+
+          if (!this.isSearch) {
+            this.searchService.clear();
+          }
         });
 
     // ------------------------------------------------------------
-    this.searchService.subscribe(value => {
+    this.searchService.subscribeToSearch(value => {
       this.searchValue = value;
       this.mailboxValue = '';
     });
 
     // ------------------------------------------------------------
     this.allBtnService$ = this.deleteAllButtonService.subscribe(() => {
-      const deleting: ILetter[] = this.letters.filter(letter => letter._checked).map(item => item);
+      const deleting: ILetter[] = this.lettersService.letters.filter(letter => letter._checked).map(item => item);
 
       this.lettersService
         .delete(deleting, letterDeleted => {
-          const idx: number = this.letters.indexOf(letterDeleted);
+          const idx: number = this.lettersService.letters.indexOf(letterDeleted);
 
           if (idx > -1) {
-            this.letters.splice(idx, 1);
-            const tmp = this.letters;
-            this.letters = [];
-            tmp.forEach(item => this.letters.push(item));
+            this.lettersService.letters.splice(idx, 1);
+            const tmp = this.lettersService.letters;
+            this.lettersService.letters = [];
+            tmp.forEach(item => this.lettersService.letters.push(item));
           };
         });
     });
@@ -75,7 +78,7 @@ export class MailListComponent implements OnInit {
         .subscribe(flag => {
           const mailbox = this.mailboxId;
 
-          this.letters.forEach(letter => {
+          this.lettersService.letters.forEach(letter => {
             if (letter.mailbox === mailbox) {
               letter._checked = flag;
             }
@@ -94,13 +97,10 @@ export class MailListComponent implements OnInit {
 
   refreshIfFlag() {
     if (this.lettersService.flagRefresh) {
-      this.letters = [];
+      this.lettersService.letters = [];
       this.lettersService
           .getAll()
-          .subscribe(data => {
-            this.letters = data;
-            this.letters.forEach(letter => letter._checked = false);
-          });
+          .subscribe();
     }
   }
 
@@ -111,7 +111,7 @@ export class MailListComponent implements OnInit {
 
 
   uncheckAll() {
-    this.letters.forEach(letter => letter._checked = false);
+    this.lettersService.letters.forEach(letter => letter._checked = false);
   }
 
 
@@ -119,7 +119,7 @@ export class MailListComponent implements OnInit {
   mailItemClicked() {
     this.checkboxLetterService
         .informAllChecked((() => {
-          const filtered = this.letters.filter(letter => letter.mailbox === this.mailboxId);
+          const filtered = this.lettersService.letters.filter(letter => letter.mailbox === this.mailboxId);
           return filtered.length > 0 && filtered.every(letter => letter._checked);
         })());
   }

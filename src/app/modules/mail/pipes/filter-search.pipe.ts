@@ -12,7 +12,7 @@ export class FilterSearchPipe implements PipeTransform {
   constructor () { }
 
   transform(letters: ILetter[], searchValue: string): any {
-    if (!searchValue) {
+    if (typeof(searchValue) === 'undefined') {
       return letters;
     }
 

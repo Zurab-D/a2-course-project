@@ -25,7 +25,6 @@ import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { SettingsComponent } from './components/settings/settings.component';
 
-// import { MainModule } from './modules/main/main.module';
 import { UsersModule } from './modules/users/users.module';
 import { MailModule } from './modules/mail/mail.module';
 import { HeaderModule } from './modules/header/header.module';
@@ -43,7 +42,6 @@ import { Routes } from './app.routes';
     EqualValidator,
   ],
   imports: [
-    // MainModule,
     MailModule,
     UsersModule,
     HeaderModule,

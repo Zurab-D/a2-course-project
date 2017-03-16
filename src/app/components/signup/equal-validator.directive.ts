@@ -15,15 +15,16 @@ export class EqualValidator implements Validator {
 
     private get isReverse() {
         if (!this.reverse) return false;
+
         return this.reverse === 'true' ? true: false;
     }
 
     validate(c: AbstractControl): { [key: string]: any } {
         // self value
-        let selfValue = c.value;
+        const selfValue = c.value;
 
         // controlElement value
-        let controlElement = c.root.get(this.validateEqual);
+        const controlElement = c.root.get(this.validateEqual);
 
         // value not equal
         if (controlElement && selfValue !== controlElement.value && !this.isReverse) {
@@ -35,14 +36,16 @@ export class EqualValidator implements Validator {
         // value equal and reverse
         if (controlElement && selfValue === controlElement.value && this.isReverse) {
             delete controlElement.errors['validateEqual'];
-            if (!Object.keys(controlElement.errors).length) controlElement.setErrors(null);
+            if (!Object.keys(controlElement.errors).length) {
+              controlElement.setErrors(null);
+            }
         }
 
         // value not equal and reverse
         if (controlElement && selfValue !== controlElement.value && this.isReverse) {
             controlElement.setErrors({
                 validateEqual: false
-            })
+            });
         }
 
         return null;

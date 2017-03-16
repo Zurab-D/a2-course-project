@@ -9,6 +9,7 @@ export class MailListResolve implements Resolve<any> {
   constructor(private lettersService: LettersService) {}
 
   resolve(route: ActivatedRouteSnapshot) {
+
     return this.lettersService.getAll();
   }
 }

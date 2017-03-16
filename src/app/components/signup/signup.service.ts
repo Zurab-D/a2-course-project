@@ -5,16 +5,14 @@ import { Router } from '@angular/router';
 
 import 'rxjs/add/observable/of';
 
-import { ResponseService } from './response.service';
-import { CONFIG } from '../config';
+import { ResponseService } from '../../services/response.service';
+import { CONFIG } from '../../config';
 
 
 @Injectable()
 export class SignupService {
   private urlSignin = CONFIG.urlsAuth.urlSignin; // '/signin';
   private urlSignup = CONFIG.urlsAuth.urlSignup; // '/signup';
-  private urlLogout = CONFIG.urlsAuth.urlLogout; // '/logout';
-  private urlAuthorised = CONFIG.urlsAuth.urlAuthorised; // '/authorized';
 
   public user = {};
 

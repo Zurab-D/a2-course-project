@@ -18,6 +18,8 @@ import { lettersData } from '../data/letters.data';
 @Injectable()
 export class LettersService {
 
+  letters: ILetter[] = [];
+
   currentLetter: ILetter;
 
   private _flagRefresh: boolean = false;
@@ -34,6 +36,7 @@ export class LettersService {
     return this.http
       .get(CONFIG.urls.letters)
       .map(this.responseService.extractData)
+      .map(letters => this.letters = letters)
       .first()
       .catch(this.responseService.handleError)
     ;
@@ -104,6 +107,7 @@ export class LettersService {
         .subscribe(null, null, () => window.alert('Letters generated succesfully'));
   }
 
+
   delete(arr: ILetter[], callback) {
     arr.forEach(letter => {
       if (!letter._id) return;
@@ -157,8 +161,6 @@ export class LettersService {
                    .catch(this.responseService.handleError);
 
     this.usersService.saveEmailIfNotExists(letter.to);
-
-    //this.usersService.updateEmail(letter.to);
 
     return res;
   }

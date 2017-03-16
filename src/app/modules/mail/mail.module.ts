@@ -15,19 +15,24 @@ import { FilterSearchPipe } from './pipes/filter-search.pipe';
 
 import { LetterResolve } from './resolves/letter.resolve';
 import { MailListResolve } from './resolves/mail-list.resolve';
+
 import { MailboxesResolve } from './resolves/mailboxes.resolve';
 
 import { TypedirectiveDirective } from './mail-edit/typedirective.directive';
 
 import { AuthGuardService } from '../../services/auth-guard.service';
+import { MailSearchComponent } from './mail-search/mail-search.component';
 
 
 export const MailRoutes = [
   { path: '', component: MailComponent,
     canActivate : [AuthGuardService],
-      resolve: { mailboxes: MailboxesResolve },
+    resolve: { mailboxes: MailboxesResolve, mailList: MailListResolve },
       children: [
         { path: 'new', component: MailEditComponent },
+
+        { path: 'search/:value', component: MailSearchComponent
+        },
 
         { path: ':mailbox', component: MailListComponent,
           resolve: { mailList: MailListResolve },
@@ -50,6 +55,7 @@ export const MailRoutes = [
     FilterMailboxPipe,
     FilterSearchPipe,
     TypedirectiveDirective,
+    MailSearchComponent,
   ],
   imports: [
     CommonModule,

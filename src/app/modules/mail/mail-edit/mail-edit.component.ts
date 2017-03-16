@@ -3,7 +3,7 @@
  */
 
 
-import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
@@ -18,7 +18,7 @@ import { DeleteAllButtonService } from '../../../services/delete-all-button.serv
   templateUrl: './mail-edit.component.html',
   styleUrls: ['./mail-edit.component.css']
 })
-export class MailEditComponent implements OnInit, AfterViewInit {
+export class MailEditComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private id: string;
   public letter: ILetter = new Letter();

@@ -28,12 +28,24 @@ export class MailboxesService {
   }
 
 
-  getMailboxId(mailbox) {
+  getMailboxId(mailbox: string): string {
     if (mailbox) {
       mailbox = mailbox.toLowerCase();
       for (let i = 0; i < this.mailboxes.length; i++) {
         if (this.mailboxes[i].title.toLowerCase() === mailbox) {
           return this.mailboxes[i]._id;
+        }
+      }
+    }
+    return undefined;
+  }
+
+
+  getMailboxTitle(id: string): string {
+    if (id) {
+      for (let i = 0; i < this.mailboxes.length; i++) {
+        if (this.mailboxes[i]._id === id) {
+          return this.mailboxes[i].title;
         }
       }
     }
