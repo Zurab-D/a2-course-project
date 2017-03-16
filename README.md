@@ -58,3 +58,5 @@ Before running the tests make sure you are serving the app via `ng serve`.
     - First of all read this article: http://developer.telerik.com/featured/quick-angular-2-hosting-angular-cli-github-pages
     - and this, if prev one doesn't help: http://colinmorris.github.io/blog/ng2-poor-mans-deploy
     - After all preparations run `ng github-pages:deploy` to deploy to Github Pages.
+
+    --- UPD: command `ng github-pages:deploy` doesn't work anymore with last version of angular-cli (1.0.0-rc.1)
