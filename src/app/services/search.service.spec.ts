@@ -14,6 +14,6 @@ describe('SearchService', () => {
   it('should ...', inject([SearchService], (service: SearchService) => {
     expect(service).toBeTruthy();
     expect(service.search).toBeTruthy();
-    expect(service.subscribe).toBeTruthy();
+    expect(service.subscribeToSearch).toBeTruthy();
   }));
 });

@@ -43,3 +43,20 @@ UserEditComponent - все ли тут верно сделано? Возможн
 которыми он будет пользоваться и таким образом каждый модуль должен быть полностью самодостаточен?
     А если есть сервис в котором содержатся данные, которые могут изменять разные модули/компоненты и эти изменения должны
 быть видны всем?
+
+
+
+-------------
+В файле "login.component.ts" есть метод "onSubmit()"
+Как его можно протестировать?
+
+
+
+-------------
+Не проходит тест "MailSearchComponent should create" (mail-search.component.spec.ts)
+Пишет:
+  Chrome 56.0.2924 (Windows 7 0.0.0) MailSearchComponent should create FAILED
+          Can't bind to 'isSearch' since it isn't a known property of 'app-mail-list'.
+          1. If 'app-mail-list' is an Angular component and it has 'isSearch' input, then verify that it is part of this module.
+          ...
+При этом "app-mail-list" (MailListComponent) влючен в тот же модуль что и тестируемый MailSearchComponent
