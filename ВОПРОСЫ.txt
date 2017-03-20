@@ -54,9 +54,4 @@ UserEditComponent - все ли тут верно сделано? Возможн
 
 -------------
 Не проходит тест "MailSearchComponent should create" (mail-search.component.spec.ts)
-Пишет:
-  Chrome 56.0.2924 (Windows 7 0.0.0) MailSearchComponent should create FAILED
-          Can't bind to 'isSearch' since it isn't a known property of 'app-mail-list'.
-          1. If 'app-mail-list' is an Angular component and it has 'isSearch' input, then verify that it is part of this module.
-          ...
-При этом "app-mail-list" (MailListComponent) влючен в тот же модуль что и тестируемый MailSearchComponent
+UPD: РЕШЕНО!
